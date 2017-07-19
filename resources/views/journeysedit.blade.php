@@ -45,10 +45,10 @@
             <!--/目的地関連-->
             <!-- Saveボタン/Backボタン -->
             <div class="well well-sm">
+                <a class="btn btn-link pull-right" href="{{ url('/') }}">
+                    <i class="glyphicon glyphicon-backward"></i>  Back
+                </a>
                 <button type="submit" class="btn btn-primary">Save</button>
-                    <a class="btn btn-link pull-right" href="{{ url('/') }}">
-                        <i class="glyphicon glyphicon-backward"></i>  Back
-                    </a>
             </div>
             <!-- id 値を送信 -->
             <input type="hidden" name="id" value="{{$journey->id}}" /> <!--/ id 値を送信 -->

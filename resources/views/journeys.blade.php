@@ -1,19 +1,17 @@
-<!-- resources/views/books.blade.php -->
-
 <!--layouts/app.blade.phpと同じ意味-->
 @extends('layouts.app')
 <!--section内の内容をcontentで規定する，後で呼び出せる-->
 @section('content')
-    
+
     <!-- Bootstrap の定形コード... -->
-    
+
     <div class="panel-body">
         <!--バリデーションエラーの表示に使用-->
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
-        
-         <!-- 現在 本 -->
-         @if (count($journeys) > 0)
+
+        <!-- 現在 本 -->
+        @if (count($journeys) > 0)
             <div class="panel panel-default">
                 <div class="panel-heading"> 
                 </div>
@@ -33,9 +31,13 @@
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $journey->dep_time }}</div>
+                                    <!--<div>{{ $journey->route }}</div>-->
+                                    <!--<div>{{ $journey->des_time }}</div>-->
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $journey->dep_comment }}</div>
+                                    <!--<div>{{ $journey->r_comment }}</div>-->
+                                    <!--<div>{{ $journey->des_comment }}</div>-->
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $journey->route }}</div>
@@ -144,7 +146,7 @@
                 </div>
             </div>
         </form>
-   
+
     </div>
 @endsection
 
