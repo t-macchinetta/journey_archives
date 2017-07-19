@@ -6,18 +6,28 @@
         <form action="{{ url('journeys/update') }}" method="POST">
             <!-- 出発地関連 -->
             <div class="form-group">
-                <label for="departure">出発地</label>
+                <label for="departure">出発地*</label>
                 <input type="text" id="departure" name="departure" class="form-control" value="{{$journey->departure}}">
             </div>
             <div class="form-group">
-                <label for="dep_time">Number</label>
+                <label for="dep_time">出発時間*</label>
                 <input type="time" id="dep_time" name="dep_time" class="form-control" value="{{$journey->dep_time}}">
             </div>
             <div class="form-group">
-                <label for="dep_comment">Amount</label>
+                <label for="dep_comment">コメント</label>
                 <input type="text" id="dep_comment" name="dep_comment" class="form-control" value="{{$journey->dep_comment}}">
             </div>
             <!--/出発地関連-->
+            <!-- 経路関連 -->
+            <div class="form-group">
+                <label for="route">経路*</label>
+                <input type="text" id="route" name="route" class="form-control" value="{{$journey->route}}">
+            </div>
+            <div class="form-group">
+                <label for="r_comment">コメント</label>
+                <input type="text" id="r_comment" name="r_comment" class="form-control" value="{{$journey->r_comment}}">
+            </div>
+            <!--/経路関連-->
 
             <!-- 目的地関連 -->
             <div class="form-group">

@@ -12,6 +12,79 @@
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
         
+         <!-- 現在 本 -->
+         @if (count($journeys) > 0)
+            <div class="panel panel-default">
+                <div class="panel-heading"> 
+                </div>
+                <div class="panel-body">
+                    <table class="table table-striped task-table">
+                    <!--テーブルヘッダ-->
+                        <thead>
+                            <th>レコード一覧</th>
+                            <th>&nbsp;</th>
+                        </thead>
+                        <!-- テーブル本体 -->
+                        <tbody>
+                         @foreach ($journeys as $journey)
+                            <tr>
+                                <td class="table-text">
+                                    <div>{{ $journey->departure }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->dep_time }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->dep_comment }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->route }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->r_comment }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->destination }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->des_time }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $journey->des_comment }}</div>
+                                </td>
+                                
+                                <!--本更新ボタン-->
+                                <td>
+                                    <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-primary">
+                                            <!--更新-->
+                                            <i class="glyphicon glyphicon-pencil"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                                <!-- 本: 削除ボタン -->
+                                <td>
+                                    <form action="{{ url('journey/'.$journey->id) }}" method="POST">
+                                        {{ csrf_field() }}
+                                        {{ method_field('DELETE') }}
+                                        <!--bootstrapのcomponentsの値をクラスに追加する-->
+                                        <button type="submit" class="btn btn-danger">
+                                            <!--削除-->
+                                            <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                         @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        @endif
+    <!--  ook: 既に登録されてる本 リスト -->
+
+        
         <!-- 本登録フォーム -->
         <!--urlをつけると自動的にドメインを追加してくれる-->
         <form action="{{ url('journeys') }}" method="POST" class="form-horizontal">
@@ -71,77 +144,6 @@
                 </div>
             </div>
         </form>
-         <!-- 現在 本 -->
-         @if (count($journeys) > 0)
-            <div class="panel panel-default">
-                <div class="panel-heading"> 
-                </div>
-                <div class="panel-body">
-                <table class="table table-striped task-table">
-                    <!--テーブルヘッダ-->
-                    <thead>
-                        <th>レコード一覧</th>
-                        <th>&nbsp;</th>
-                    </thead>
-                    <!-- テーブル本体 -->
-                    <tbody>
-                         @foreach ($journeys as $journey)
-                            <tr>
-                                <td class="table-text">
-                                    <div>{{ $journey->departure }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->dep_time }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->dep_comment }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->route }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->r_comment }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->destination }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->des_time }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->des_comment }}</div>
-                                </td>
-                                
-                                <!--本更新ボタン-->
-                                <td>
-                                    <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-primary">
-                                            <i class="glyphicon glyphicon-trash"></i>
-                                            更新 
-                                        </button>
-                                    </form>
-                                </td>
-                                <!-- 本: 削除ボタン -->
-                                <td>
-                                    <form action="{{ url('journey/'.$journey->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
-                                            削除
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                         @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    @endif
-    <!--  ook: 既に登録されてる本 リスト -->
    
     </div>
 @endsection

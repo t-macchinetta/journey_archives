@@ -60,12 +60,12 @@ Route::post('/journeys', function (Request $request) {
 
 });
 
-Route::post('/booksedit/{books}', function(Books $books) {
-    //{books}id 値を取得 => Books $books id 値の1レコード取得
-    return view('booksedit', ['book' => $books]);
+Route::post('/journeysedit/{journeys}', function(Journeys $journeys) {
+    //{journeys}id 値を取得 => Journeys $journeys id 値の1レコード取得
+    return view('journeysedit', ['journey' => $journeys]);
 });
 
-Route::post('/books/update', function(Request $request){
+Route::post('/journeys/update', function(Request $request){
 //バリデーション
     $validator = Validator::make($request->all(), [
         // 入力必須，最大最小入力長さを指定している
@@ -108,7 +108,7 @@ Route::post('/books/update', function(Request $request){
     $journeys->img13 = $request->img13;
     $journeys->img14 = $request->img14;
     $journeys->img15 = $request->img15;
-    $books->save();   //「/」ルートにリダイレクト 
+    $journeys->save();   //「/」ルートにリダイレクト 
     return redirect('/');
 });
 
