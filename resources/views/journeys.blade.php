@@ -10,7 +10,7 @@
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
 
-        <!-- 現在 本 -->
+        <!--記録一覧-->
         @if (count($journeys) > 0)
             <div class="panel panel-default">
                 <div class="panel-heading"> 
@@ -28,32 +28,35 @@
                             <tr>
                                 <td class="table-text">
                                     <div>{{ $journey->departure }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->dep_time }}</div>
+                                    <div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i></div>
                                     <!--<div>{{ $journey->route }}</div>-->
-                                    <!--<div>{{ $journey->des_time }}</div>-->
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->dep_comment }}</div>
-                                    <!--<div>{{ $journey->r_comment }}</div>-->
-                                    <!--<div>{{ $journey->des_comment }}</div>-->
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->route }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->r_comment }}</div>
-                                </td>
-                                <td class="table-text">
                                     <div>{{ $journey->destination }}</div>
                                 </td>
                                 <td class="table-text">
+                                    <div>{{ $journey->dep_time }}</div>
+                                    <div>{{ $journey->route }}</div>
                                     <div>{{ $journey->des_time }}</div>
                                 </td>
                                 <td class="table-text">
+                                    <!--<div>{{ $journey->dep_comment }}</div>-->
+                                    <!--<div>{{ $journey->r_comment }}</div>-->
                                     <div>{{ $journey->des_comment }}</div>
                                 </td>
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $journey->route }}</div>-->
+                                <!--</td>-->
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $journey->r_comment }}</div>-->
+                                <!--</td>-->
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $journey->destination }}</div>-->
+                                <!--</td>-->
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $journey->des_time }}</div>-->
+                                <!--</td>-->
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $journey->des_comment }}</div>-->
+                                <!--</td>-->
                                 
                                 <!--本更新ボタン-->
                                 <td>
@@ -105,20 +108,20 @@
                 <div class="col-sm-6">
                     <input type="time" name="dep_time" id="dep_time" class="form-control">
                 </div>
-                <label for="dep_comment" class="col-sm-4 control-label">コメント</label>
-                <div class="col-sm-6">
-                    <input type="text" name="dep_comment" id="dep_comment" class="form-control">
-                </div>
+                <!--<label for="dep_comment" class="col-sm-4 control-label">コメント</label>-->
+                <!--<div class="col-sm-6">-->
+                <!--    <input type="text" name="dep_comment" id="dep_comment" class="form-control">-->
+                <!--</div>-->
                 <!--/出発関連-->
                 <!--経路関連-->
                 <label for="route" class="col-sm-4 control-label">経路*</label>
                 <div class="col-sm-6">
                     <input type="text" name="route" id="route" class="form-control">
                 </div>
-                <label for="r_comment" class="col-sm-4 control-label">コメント</label>
-                <div class="col-sm-6">
-                    <input type="text" name="r_comment" id="r_comment" class="form-control">
-                </div>
+                <!--<label for="r_comment" class="col-sm-4 control-label">コメント</label>-->
+                <!--<div class="col-sm-6">-->
+                <!--    <input type="text" name="r_comment" id="r_comment" class="form-control">-->
+                <!--</div>-->
                 <!--/経路関連-->
                 <!--目的地関連-->
                 <label for="destination" class="col-sm-4 control-label">目的地*</label>
