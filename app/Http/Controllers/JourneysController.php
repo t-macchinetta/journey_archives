@@ -9,6 +9,7 @@ use App\Journeys;
 use App\Articles;
 // ↓条件指定のため必要
 use Validator;
+use Session;
 
 class JourneysController extends Controller
 {
@@ -100,9 +101,11 @@ class JourneysController extends Controller
         // ↓getをpagenateに変更できる
         // $journeys = Journeys::orderBy('created_at', 'asc')->get();
         // $articles = Articles::find($request->u_id);
-        // Session::put('unique', $request->u_id);
-        // $unique = Session::get('unique');
-        $unique = $request->u_id;
+        if($request->u_id != ""){
+            session::put('unique', $request->u_id);
+        }
+        $unique = session::get('unique');
+        // $unique = $request->u_id;
         $journeys = Journeys::where('u_id', '=', $unique)
                             ->orderBy('created_at', 'asc')
                             ->get();
@@ -143,7 +146,7 @@ class JourneysController extends Controller
         $journeys->img4 = $request->img4;
         $journeys->img5 = $request->img5;
         $journeys->save();   //「/」ルートにリダイレクト 
-        return redirect('/');
+        return redirect('/detail');
         // ↑うまくdetailにするよう考える
     }
     // 詳細の更新ページ.$request->u_id
@@ -184,13 +187,13 @@ class JourneysController extends Controller
         $journeys->img4 = $request->img4;
         $journeys->img5 = $request->img5;
         $journeys->save();   //「/」ルートにリダイレクト 
-        return redirect('/')->with('request->u_id',$request->u_id);
+        return redirect('/detail')->with('request->u_id',$request->u_id);
         // ↑うまくdetailにする方法を考える
     }
     // 詳細の削除処理.$request->u_id
     public function destroy(Journeys $journey){
 	 $journey->delete();
-	 return redirect('/');
+	 return redirect('/detail');
 // 	 ↑うまくdetailに移動するよう考える
     }
 

@@ -22,7 +22,7 @@ Route::post('/articles/update', 'JourneysController@title_update');
 Route::delete('/article/{article}', 'JourneysController@delete');
 
 // 詳細表示 /{articles}
-Route::post('/detail', 'JourneysController@detail'); 
+Route::any('/detail', 'JourneysController@detail'); 
 
 // 新「本」を追加
 // formの情報を受け取る． $_GET[]$_POST[]とかの意味
