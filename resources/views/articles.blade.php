@@ -9,9 +9,9 @@
         <!--バリデーションエラーの表示に使用-->
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
-
+        
         <!--記録一覧-->
-        @if (count($journeys) > 0)
+        @if (count($articles) > 0)
             <div class="panel panel-default">
                 <div class="panel-heading"> 
                 </div>
@@ -19,46 +19,46 @@
                     <table class="table table-striped task-table">
                     <!--テーブルヘッダ-->
                         <thead>
-                            <th>レコード一覧</th>
+                            <th>旅行一覧</th>
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->
                         <tbody>
-                         @foreach ($journeys as $journey)
+                         @foreach ($articles as $article)
                             <tr>
                                 <td class="table-text">
-                                    <div>{{ $journey->dep_time }}</div>
-                                    <div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i></div>
-                                    <div>{{ $journey->des_time }}</div>
+                                    <div>{{ $article->title }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $journey->departure }}</div>
-                                    <div>{{ $journey->route }}</div>
-                                    <div>{{ $journey->destination }}</div>
+                                    <div>{{ $article->dep_date }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $journey->comment }}</div>
-                                    <div>{{ $journey->u_id }}</div>
+                                    <div>{{ $article->length }}</div>
                                 </td>
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->route }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->r_comment }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->destination }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->des_time }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->des_comment }}</div>-->
-                                <!--</td>-->
-                                
+                                <td class="table-text">
+                                    <div>{{ $article->cost }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $article->traffic }}</div>
+                                </td>
+                                <td class="table-text">
+                                    <div>{{ $article->u_id }}</div>
+                                </td>
+                                <!--詳細ボタン-->
+                                <td>
+                                    <!--.$article->u_id)-->
+                                    <form action="{{ url('detail') }}" method="POST">
+                                        {{ csrf_field() }}
+                                        <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
+                                        <button type="submit" class="btn btn-primary">
+                                            <!--更新-->
+                                            <i class="glyphicon glyphicon-play"></i>
+                                        </button>
+                                    </form>
+                                </td>
                                 <!--本更新ボタン-->
                                 <td>
-                                    <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
+                                    <form action="{{ url('articlesedit/'.$article->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-primary">
                                             <!--更新-->
@@ -68,7 +68,7 @@
                                 </td>
                                 <!-- 本: 削除ボタン -->
                                 <td>
-                                    <form action="{{ url('journey/'.$journey->id) }}" method="POST">
+                                    <form action="{{ url('article/'.$article->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <!--bootstrapのcomponentsの値をクラスに追加する-->
@@ -87,46 +87,34 @@
         @endif
     <!--  ook: 既に登録されてる本 リスト -->
 
-        
         <!-- 本登録フォーム -->
         <!--urlをつけると自動的にドメインを追加してくれる-->
-        <form action="{{ url('journeys') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('articles') }}" method="POST" class="form-horizontal">
             <!--↓phpのsession的なチェックをする，セキュリティ的に使用すると良い-->
             {{ csrf_field() }}
-            {{ $unique }}
-            <input type="hidden" name="u_id" id="u_id" value="{{$unique}}">
-            <!--<input type="hidden" name="u_id" id="u_id" value="1">-->
-            <!-- 本のタイトル -->
+            {{ Auth::user()->name }}
+        <!-- 本のタイトル -->
             <div class="form-group">
-                <!--出発関連-->
-                <label for="dep_time" class="col-sm-4 control-label">出発時間*</label>
+                <label for="title" class="col-sm-4 control-label">タイトル*</label>
                 <div class="col-sm-6">
-                    <input type="time" name="dep_time" id="dep_time" class="form-control">
+                    <input type="text" name="title" id="title" class="form-control">
                 </div>
-                <label for="departure" class="col-sm-4 control-label">出発地*</label>
+                <label for="dep_date" class="col-sm-4 control-label">出発日*</label>
+                <div class="col-sm-6">
+                    <input type="date" name="dep_date" id="dep_date" class="form-control">
+                </div>
+                <label for="length" class="col-sm-4 control-label">長さ*</label>
+                <div class="col-sm-6">
+                    <input type="text" name="length" id="length" class="form-control">
+                </div>
+                <label for="cost" class="col-sm-4 control-label">総予算*</label>
+                <div class="col-sm-6">
+                    <input type="number" name="cost" id="cost" class="form-control">
+                </div>
+                <label for="traffic" class="col-sm-4 control-label">主な交通*</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
-                    <input type="text" name="departure" id="departure" class="form-control">
-                </div>
-                <!--経路関連-->
-                <label for="route" class="col-sm-4 control-label">経路*</label>
-                <div class="col-sm-6">
-                    <input type="text" name="route" id="route" class="form-control">
-                </div>
-                <!--目的地関連-->
-                <label for="des_time" class="col-sm-4 control-label">到着時間*</label>
-                <div class="col-sm-6">
-                    <input type="time" name="des_time" id="des_time" class="form-control">
-                </div>
-                <label for="destination" class="col-sm-4 control-label">目的地*</label>
-                <div class="col-sm-6">
-                    <!--↓項目を追加する，時間とか価格とか-->
-                    <input type="text" name="destination" id="destination" class="form-control">
-                </div>
-                <!--コメント-->
-                <label for="comment" class="col-sm-4 control-label">コメント</label>
-                <div class="col-sm-6">
-                    <input type="text" name="comment" id="comment" class="form-control">
+                    <input type="text" name="traffic" id="traffic" class="form-control">
                 </div>
             </div>
             
@@ -142,7 +130,3 @@
 
     </div>
 @endsection
-
-
-
-
