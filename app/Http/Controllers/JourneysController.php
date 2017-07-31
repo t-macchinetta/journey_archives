@@ -147,7 +147,6 @@ class JourneysController extends Controller
         $journeys->img5 = $request->img5;
         $journeys->save();   //「/」ルートにリダイレクト 
         return redirect('/detail');
-        // ↑うまくdetailにするよう考える
     }
     // 詳細の更新ページ.$request->u_id
     public function edit(Journeys $journeys){
@@ -188,13 +187,11 @@ class JourneysController extends Controller
         $journeys->img5 = $request->img5;
         $journeys->save();   //「/」ルートにリダイレクト 
         return redirect('/detail')->with('request->u_id',$request->u_id);
-        // ↑うまくdetailにする方法を考える
     }
     // 詳細の削除処理.$request->u_id
     public function destroy(Journeys $journey){
 	 $journey->delete();
 	 return redirect('/detail');
-// 	 ↑うまくdetailに移動するよう考える
     }
 
 }
