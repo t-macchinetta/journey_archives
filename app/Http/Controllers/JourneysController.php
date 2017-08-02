@@ -105,11 +105,15 @@ class JourneysController extends Controller
             session::put('unique', $request->u_id);
         }
         $unique = session::get('unique');
+        if($unique == ""){
+    	    return redirect('/');
+        }else{
         // $unique = $request->u_id;
         $journeys = Journeys::where('u_id', '=', $unique)
                             ->orderBy('created_at', 'asc')
                             ->get();
         return view('journeys', ['journeys' => $journeys])->with('unique',$unique);
+        }
     }
     // 詳細の登録処理
     public function store(Request $request){
