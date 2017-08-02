@@ -11,20 +11,20 @@ Route::any('/', 'JourneysController@index');
 // 旅行を登録する
 Route::post('/articles', 'JourneysController@create');
 
-// 旅行の詳細情報を更新するページへ遷移する処理
+// 旅行の概要を更新するページへ遷移する処理
 Route::post('/articlesedit/{articles}', 'JourneysController@title_edit');
 
-// 旅行のレコードを更新する処置
+// 旅行の概要を更新する処置
 Route::post('/articles/update', 'JourneysController@title_update');
 
-// 本を削除 する処理
+// 旅行自体を削除する処理
 // Booksがテーブル名
 Route::delete('/article/{article}', 'JourneysController@delete');
 
 // 詳細表示 /{articles}
 Route::any('/detail', 'JourneysController@detail'); 
 
-// 新「本」を追加
+// 新しい旅行を追加
 // formの情報を受け取る． $_GET[]$_POST[]とかの意味
 Route::post('/journeys', 'JourneysController@store');
 
@@ -34,13 +34,12 @@ Route::post('/journeysedit/{journeys}', 'JourneysController@edit');
 // 旅行のレコードを更新する処置
 Route::post('/journeys/update', 'JourneysController@update');
 
-// 本を削除 する処理
-// Booksがテーブル名
+// レコードを削除する処理
 Route::delete('/journey/{journey}', 'JourneysController@destroy');
 
 
+// ↓ユーザー認証関連
 Route::auth();
-
 Route::get('/home', 'HomeController@index');
 
 

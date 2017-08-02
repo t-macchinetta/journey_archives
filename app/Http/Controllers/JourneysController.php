@@ -9,6 +9,7 @@ use App\Journeys;
 use App\Articles;
 // ↓条件指定のため必要
 use Validator;
+// ↓セッションを使用するため
 use Session;
 
 class JourneysController extends Controller
@@ -21,7 +22,7 @@ class JourneysController extends Controller
     // 最初のページ
     public function index(){
         // ↓getをpagenateに変更できる
-        // $articles = Articles::orderBy('created_at', 'desc')->get();
+        // emailでユーザーを指定．新しい順に作成したもののリストを並べる
         $articles = Articles::where('email', '=', \Auth::user()->email)
                             ->orderBy('created_at', 'desc')
                             ->get();
@@ -37,15 +38,14 @@ class JourneysController extends Controller
             'length' => 'required|min:1|max:255',
             'cost' => 'required|min:1|max:255',
             'traffic' => 'required|min:1|max:255',
-            // 例'email' => 'required',
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
-                return redirect('/')
+            return redirect('/')
                     ->withInput()
                     ->withErrors($validator);
         }
-            // Eloquentモデル
+        // Eloquentモデル
         $articles = new Articles;
         $articles->name = \Auth::user()->name;
         $articles->email = \Auth::user()->email;
@@ -64,7 +64,7 @@ class JourneysController extends Controller
     }
     // 全体の更新処理
     public function title_update(Request $request){
-        //バリデーション
+        //バリデーション
         $validator = Validator::make($request->all(), [
             // 入力必須，最大最小入力長さを指定している
             'title' => 'required|min:1|max:255',
@@ -72,15 +72,14 @@ class JourneysController extends Controller
             'length' => 'required|min:1|max:255',
             'cost' => 'required|min:1|max:255',
             'traffic' => 'required|min:1|max:255',
-            // 例'email' => 'required',
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
-                return redirect('/detail')
+            return redirect('/detail')
                     ->withInput()
                     ->withErrors($validator);
         }
-            // Eloquentモデル
+        // Eloquentモデル
         $articles = Articles::find($request->id);
         $articles->title= $request->title;
         $articles->dep_date = $request->dep_date;
@@ -92,29 +91,32 @@ class JourneysController extends Controller
     }
     // 全体の削除処理
     public function delete(Articles $article){
-	 $article->delete();
-	 return redirect('/');
+	    $article->delete();
+	    return redirect('/');
     }
 
     // 旅行詳細ページ
     public function detail(Request $request){
         // ↓getをpagenateに変更できる
-        // $journeys = Journeys::orderBy('created_at', 'asc')->get();
-        // $articles = Articles::find($request->u_id);
+        // ↓リクエストが飛んできた場合はセッションに保存
         if($request->u_id != ""){
             session::put('unique', $request->u_id);
         }
+        // ↓セッションの値を変数に格納
         $unique = session::get('unique');
+        // ↓セッションがからの場合はトップページにリダイレクト
         if($unique == ""){
     	    return redirect('/');
         }else{
-        // $unique = $request->u_id;
-        $journeys = Journeys::where('u_id', '=', $unique)
-                            ->orderBy('created_at', 'asc')
-                            ->get();
-        return view('journeys', ['journeys' => $journeys])->with('unique',$unique);
+            // ↓ユニークIDで検索し，合致するものを並べて表示
+            $journeys = Journeys::where('u_id', '=', $unique)
+                                ->orderBy('created_at', 'asc')
+                                ->get();
+            // ↓変数を持ったまま詳細表示へ移動，登録時にinput hddenに値に埋め込む
+            return view('journeys', ['journeys' => $journeys])->with('unique',$unique);
         }
     }
+    
     // 詳細の登録処理
     public function store(Request $request){
         //バリデーション，取得した内容をall関数で掴む
@@ -125,7 +127,6 @@ class JourneysController extends Controller
             'route' => 'required|min:1|max:255',
             'des_time' => 'required|min:1|max:255',
             'destination' => 'required|min:1|max:255',
-            // 例'email' => 'required',
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
@@ -133,7 +134,7 @@ class JourneysController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
-            // Eloquentモデル
+        // Eloquentモデル
         $journeys = new Journeys;
         $journeys->name = \Auth::user()->name;
         $journeys->email = \Auth::user()->email;
@@ -149,17 +150,17 @@ class JourneysController extends Controller
         $journeys->img3 = $request->img3;
         $journeys->img4 = $request->img4;
         $journeys->img5 = $request->img5;
-        $journeys->save();   //「/」ルートにリダイレクト 
+        $journeys->save(); 
         return redirect('/detail');
     }
-    // 詳細の更新ページ.$request->u_id
+    // 詳細の更新ページ
     public function edit(Journeys $journeys){
         //{journeys}id 値を取得 => Journeys $journeys id 値の1レコード取得
         return view('journeysedit', ['journey' => $journeys]);
     }
     // 詳細の更新処理
     public function update(Request $request){
-        //バリデーション
+        // バリデーション
         $validator = Validator::make($request->all(), [
             // 入力必須，最大最小入力長さを指定している
             'id' => 'required',
@@ -168,7 +169,6 @@ class JourneysController extends Controller
             'route' => 'required|min:1|max:255',
             'des_time' => 'required|min:1|max:255',
             'destination' => 'required|min:1|max:255',
-            // 例'email' => 'required',
         ]);
         //バリデーション:エラー
         if ($validator->fails()) {
@@ -176,7 +176,7 @@ class JourneysController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
-            // Eloquentモデル
+        // Eloquentモデル
         $journeys = Journeys::find($request->id);
         $journeys->dep_time = $request->dep_time;
         $journeys->departure = $request->departure;
@@ -189,13 +189,13 @@ class JourneysController extends Controller
         $journeys->img3 = $request->img3;
         $journeys->img4 = $request->img4;
         $journeys->img5 = $request->img5;
-        $journeys->save();   //「/」ルートにリダイレクト 
+        $journeys->save(); 
         return redirect('/detail')->with('request->u_id',$request->u_id);
     }
-    // 詳細の削除処理.$request->u_id
+    // 詳細の削除処理
     public function destroy(Journeys $journey){
-	 $journey->delete();
-	 return redirect('/detail');
+	    $journey->delete();
+	    return redirect('/detail');
     }
 
 }
