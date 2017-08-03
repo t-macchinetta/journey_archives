@@ -11,6 +11,8 @@ use App\Articles;
 use Validator;
 // ↓セッションを使用するため
 use Session;
+// ↓写真のアップロードに使用
+use Intervention\Image\Facades\Image; 
 
 class JourneysController extends Controller
 {
@@ -134,6 +136,15 @@ class JourneysController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
+        // 写真の処理
+        $input = $request->all();
+        $fileName = $input['img1']->getClientOriginalName();
+        $fileName = time()."@".$fileName;
+        $image = Image::make($input['img1']->getRealPath());
+ 
+        $image->save(public_path() . '/images/' . $fileName);
+        $path = '/images/' . $fileName;
+        
         // Eloquentモデル
         $journeys = new Journeys;
         $journeys->name = \Auth::user()->name;
@@ -145,13 +156,14 @@ class JourneysController extends Controller
         $journeys->des_time = $request->des_time;
         $journeys->destination = $request->destination;
         $journeys->comment = $request->comment;
-        $journeys->img1 = $request->img1;
+        $journeys->img1 = 'images/' . $fileName;
+        // $journeys->img1 = $request->img1;
         $journeys->img2 = $request->img2;
         $journeys->img3 = $request->img3;
         $journeys->img4 = $request->img4;
         $journeys->img5 = $request->img5;
         $journeys->save(); 
-        return redirect('/detail');
+        return redirect('/detail')->with('path',$path);
     }
     // 詳細の更新ページ
     public function edit(Journeys $journeys){

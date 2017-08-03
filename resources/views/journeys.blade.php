@@ -38,7 +38,11 @@
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $journey->comment }}</div>
-                                    <div>{{ $journey->u_id }}</div>
+                                    <!--<div>{{ $journey->u_id }}</div>-->
+                                    @if($journey->img1 != "")
+                                    <a href="{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                    
+                                    @endif
                                 </td>
                                 <!--<td class="table-text">-->
                                 <!--    <div>{{ $journey->route }}</div>-->
@@ -90,7 +94,7 @@
         
         <!-- 本登録フォーム -->
         <!--urlをつけると自動的にドメインを追加してくれる-->
-        <form action="{{ url('journeys') }}" method="POST" class="form-horizontal">
+        <form action="{{ url('journeys') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" accept="image/*">
             <!--↓phpのsession的なチェックをする，セキュリティ的に使用すると良い-->
             {{ csrf_field() }}
             {{ $unique }}
@@ -127,6 +131,11 @@
                 <label for="comment" class="col-sm-4 control-label">コメント</label>
                 <div class="col-sm-6">
                     <input type="text" name="comment" id="comment" class="form-control">
+                </div>
+                <!--写真-->
+                <label for="img1" class="col-sm-4 control-label">写真</label>
+                <div class="col-sm-6">
+                    <input type="file" name="img1" id="img1" class="form-control">
                 </div>
             </div>
             
