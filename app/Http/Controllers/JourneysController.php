@@ -136,17 +136,23 @@ class JourneysController extends Controller
                     ->withInput()
                     ->withErrors($validator);
         }
-        // 写真の処理
-        $input = $request->all();
-        $fileName = $input['img1']->getClientOriginalName();
-        $fileName = time()."@".$fileName;
-        $image = Image::make($input['img1']->getRealPath());
- 
-        $image->save(public_path() . '/images/' . $fileName);
-        $path = '/images/' . $fileName;
-        
+
         // Eloquentモデル
         $journeys = new Journeys;
+        
+        // 写真の処理
+        $input = $request->all();
+        for($i = 1; $i <= 5; $i++){
+            if(isset($input['img' . $i])){
+                $fileName[$i] = $input['img' . $i]->getClientOriginalName();
+                $fileName[$i]= time()."@".$fileName[$i];
+                $image[$i] = Image::make($input['img' . $i]->getRealPath());
+                $image[$i]->save(public_path() . '/images/' . $fileName[$i]);
+            $path[$i] = '/images/' . $fileName[$i];
+            $journeys->{'img'.$i} = 'images/' . $fileName[$i];
+            }
+        }
+        
         $journeys->name = \Auth::user()->name;
         $journeys->email = \Auth::user()->email;
         $journeys->u_id = $request->u_id;
@@ -156,12 +162,7 @@ class JourneysController extends Controller
         $journeys->des_time = $request->des_time;
         $journeys->destination = $request->destination;
         $journeys->comment = $request->comment;
-        $journeys->img1 = 'images/' . $fileName;
-        // $journeys->img1 = $request->img1;
-        $journeys->img2 = $request->img2;
-        $journeys->img3 = $request->img3;
-        $journeys->img4 = $request->img4;
-        $journeys->img5 = $request->img5;
+        
         $journeys->save(); 
         return redirect('/detail')->with('path',$path);
     }

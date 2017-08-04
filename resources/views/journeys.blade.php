@@ -39,9 +39,25 @@
                                 <td class="table-text">
                                     <div>{{ $journey->comment }}</div>
                                     <!--<div>{{ $journey->u_id }}</div>-->
-                                    @if($journey->img1 != "")
-                                    <a href="{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>
-                                    
+                                    <!--@for($i = 1; $i <= 5; $i++)-->
+                                    <!--    @if($journey->{'img'.$i} != "")-->
+                                    <!--        <a href="$journey->{'img'.$i}" ><i class="glyphicon glyphicon-picture"></i></a>-->
+                                    <!--    @endif-->
+                                    <!--@endfor-->
+                                    @if(isset($journey->img1))
+                                        <a href="{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                    @endif
+                                    @if(isset($journey->img2))
+                                        <a href="{{ $journey->img2 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                    @endif
+                                    @if(isset($journey->img3))
+                                        <a href="{{ $journey->img3 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                    @endif
+                                    @if(isset($journey->img4))
+                                        <a href="{{ $journey->img4 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                    @endif
+                                    @if(isset($journey->img5))
+                                        <a href="{{ $journey->img5 }}" ><i class="glyphicon glyphicon-picture"></i></a>
                                     @endif
                                 </td>
                                 <!--<td class="table-text">-->
@@ -136,6 +152,10 @@
                 <label for="img1" class="col-sm-4 control-label">写真</label>
                 <div class="col-sm-6">
                     <input type="file" name="img1" id="img1" class="form-control">
+                    <input type="file" name="img2" id="img2" class="form-control">
+                    <input type="file" name="img3" id="img3" class="form-control">
+                    <input type="file" name="img4" id="img4" class="form-control">
+                    <input type="file" name="img5" id="img5" class="form-control">
                 </div>
             </div>
             
