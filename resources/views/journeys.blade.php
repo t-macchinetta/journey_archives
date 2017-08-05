@@ -38,9 +38,10 @@
                                 </td>
                                 <td class="table-text">
                                     <div>{{ $journey->comment }}</div>
+                                    <!--写真のアイコン表示-->
                                     <!--<div>{{ $journey->u_id }}</div>-->
                                     <!--@for($i = 1; $i <= 5; $i++)-->
-                                    <!--    @if($journey->{'img'.$i} != "")-->
+                                    <!--    @if(isset($journey->{'img'.$i}))-->
                                     <!--        <a href="$journey->{'img'.$i}" ><i class="glyphicon glyphicon-picture"></i></a>-->
                                     <!--    @endif-->
                                     <!--@endfor-->
