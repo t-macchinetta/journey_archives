@@ -16,6 +16,7 @@
                 <label for="length">長さ*</label>
                 <!--<input type="text" id="length" name="length" class="form-control" value="{{$article->length}}">-->
                 <select name="length" id="length" class="form-control">
+                    <!--入力されている値によって初期値を選択する-->
                     @if($article->length == '1日')
                         <option value="1日" selected>1日</option>
                     @else
@@ -58,6 +59,7 @@
             <div class="form-group">
                 <label for="cost">総予算</label>
                 <!--<input type="number" id="cost" name="cost" class="form-control" value="{{$article->cost}}">-->
+                <!--↓コストの値によって初期選択する項目を分岐させる-->
                 <select name="cost" id="cost" class="form-control">
                     @if($article->cost == '\1-\10,000')
                         <option value="\1-\10,000" selected>\1-\10,000</option>
@@ -94,7 +96,51 @@
             </div>
             <div class="form-group">
                 <label for="traffic">主な交通</label>
-                <input type="text" id="traffic" name="traffic" class="form-control" value="{{$article->traffic}}">
+                <!--<input type="text" id="traffic" name="traffic" class="form-control" value="{{$article->traffic}}">-->
+                <!--↓各交通が含まれている場合にチェックボックスを初期選択状態にする-->
+                <label for="train" class="control-label">鉄道</label>
+                    @if(strpos($article->traffic,'鉄道') !== false)
+                        <input type="checkbox" name="traffic[]" id="train" class="form-control" value="鉄道" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="train" class="form-control" value="鉄道">
+                    @endif
+                <label for="bus" class="control-label">バス</label>
+                    @if(strpos($article->traffic,'バス') !== false)
+                        <input type="checkbox" name="traffic[]" id="bus" class="form-control" value="バス" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="bus" class="form-control" value="バス">
+                    @endif
+                <label for="plain" class="control-label">飛行機</label>
+                    @if(strpos($article->traffic,'飛行機') !== false)
+                        <input type="checkbox" name="traffic[]" id="plain" class="form-control" value="飛行機" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="plain" class="form-control" value="飛行機">
+                    @endif
+                <label for="ship" class="control-label">船舶</label>
+                    @if(strpos($article->traffic,'船舶') !== false)
+                        <input type="checkbox" name="traffic[]" id="ship" class="form-control" value="船舶" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="ship" class="form-control" value="船舶">
+                    @endif
+                <label for="car" class="control-label">自動車</label>
+                    @if(strpos($article->traffic,'自動車') !== false)
+                        <input type="checkbox" name="traffic[]" id="car" class="form-control" value="自動車" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="car" class="form-control" value="自動車">
+                    @endif
+                <label for="bicycle" class="control-label">自転車</label>
+                    @if(strpos($article->traffic,'自転車') !== false)
+                        <input type="checkbox" name="traffic[]" id="bicycle" class="form-control" value="自転車" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="bicycle" class="form-control" value="自転車">
+                    @endif
+                <label for="foot" class="control-label">徒歩</label>
+                    @if(strpos($article->traffic,'徒歩') !== false)
+                        <input type="checkbox" name="traffic[]" id="foot" class="form-control" value="徒歩" checked="checked">
+                    @else
+                        <input type="checkbox" name="traffic[]" id="foot" class="form-control" value="徒歩">
+                    @endif
+
             </div>
             <!-- Saveボタン/Backボタン -->
             <div class="well well-sm">

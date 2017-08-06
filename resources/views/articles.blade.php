@@ -134,6 +134,8 @@
                     <!--<input type="text" name="traffic" id="traffic" class="form-control">-->
                     <label for="train" class="control-label">鉄道</label>
                     <input type="checkbox" name="traffic[]" id="train" class="form-control" value="鉄道">
+                    <label for="bus" class="control-label">バス</label>
+                    <input type="checkbox" name="traffic[]" id="bus" class="form-control" value="バス">
                     <label for="plain" class="control-label">飛行機</label>
                     <input type="checkbox" name="traffic[]" id="plain" class="form-control" value="飛行機">
                     <label for="ship" class="control-label">船舶</label>
