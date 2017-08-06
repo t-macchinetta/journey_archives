@@ -167,14 +167,14 @@
                 <div class="col-sm-6">
                     <input type="text" name="word" id="word" class="form-control">
                 </div>
-                <label for="dep_date" class="col-sm-4 control-label">出発日</label>
+                <label for="s_dep_date" class="col-sm-4 control-label">出発日</label>
                 <div class="col-sm-6">
-                    <input type="date" name="dep_date" id="dep_date" class="form-control">
+                    <input type="date" name="dep_date" id="s_dep_date" class="form-control">
                 </div>
-                <label for="length" class="col-sm-4 control-label">長さ</label>
+                <label for="s_length" class="col-sm-4 control-label">長さ</label>
                 <div class="col-sm-6">
                     <!--<input type="text" name="length" id="length" class="form-control">-->
-                <select name="length" id="length" class="form-control">
+                <select name="length" id="s_length" class="form-control">
                         <option value=""></option>
                         <option value="1日">1日</option>
                         <option value="2日">2日</option>
@@ -185,10 +185,10 @@
                         <option value="7日">7日</option>
                 </select>
                 </div>
-                <label for="cost" class="col-sm-4 control-label">総予算</label>
+                <label for="s_cost" class="col-sm-4 control-label">総予算</label>
                 <div class="col-sm-6">
                     <!--<input type="number" name="cost" id="cost" class="form-control">-->
-                    <select name="cost" id="cost" class="form-control">
+                    <select name="cost" id="s_cost" class="form-control">
                         <option value=""></option>
                         <option value="\1-\10,000">\1-\10,000</option>
                         <option value="\10,001-\20,000">\10,001-\20,000</option>
@@ -198,26 +198,26 @@
                         <option value="\50,001-\60,000">\50,001-\60,000</option>
                     </select>
                 </div>
-                <label for="traffic" class="col-sm-4 control-label">主な交通</label>
+                <label for="s_traffic" class="col-sm-4 control-label">主な交通</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
                     <!--<input type="text" name="traffic" id="traffic" class="form-control">-->
-                    <label for="none" class="control-label">指定しない</label>
-                    <input type="radio" name="traffic" id="none" class="form-control" value="">
-                    <label for="train" class="control-label">鉄道</label>
-                    <input type="radio" name="traffic" id="train" class="form-control" value="鉄道">
-                    <label for="bus" class="control-label">バス</label>
-                    <input type="radio" name="traffic" id="bus" class="form-control" value="バス">
-                    <label for="plain" class="control-label">飛行機</label>
-                    <input type="radio" name="traffic" id="plain" class="form-control" value="飛行機">
-                    <label for="ship" class="control-label">船舶</label>
-                    <input type="radio" name="traffic" id="ship" class="form-control" value="船舶">
-                    <label for="car" class="control-label">自動車</label>
-                    <input type="radio" name="traffic" id="car" class="form-control" value="自動車">
-                    <label for="bicycle" class="control-label">自転車</label>
-                    <input type="radio" name="traffic" id="bicycle" class="form-control" value="自転車">
-                    <label for="foot" class="control-label">徒歩</label>
-                    <input type="radio" name="traffic" id="foot" class="form-control" value="徒歩">
+                    <label for="s_none" class="control-label">指定しない</label>
+                    <input type="radio" name="traffic" id="s_none" class="form-control" value="">
+                    <label for="s_train" class="control-label">鉄道</label>
+                    <input type="radio" name="traffic" id="s_train" class="form-control" value="鉄道">
+                    <label for="s_bus" class="control-label">バス</label>
+                    <input type="radio" name="traffic" id="s_bus" class="form-control" value="バス">
+                    <label for="s_plain" class="control-label">飛行機</label>
+                    <input type="radio" name="traffic" id="s_plain" class="form-control" value="飛行機">
+                    <label for="s_ship" class="control-label">船舶</label>
+                    <input type="radio" name="traffic" id="s_ship" class="form-control" value="船舶">
+                    <label for="s_car" class="control-label">自動車</label>
+                    <input type="radio" name="traffic" id="s_car" class="form-control" value="自動車">
+                    <label for="s_bicycle" class="control-label">自転車</label>
+                    <input type="radio" name="traffic" id="s_bicycle" class="form-control" value="自転車">
+                    <label for="s_foot" class="control-label">徒歩</label>
+                    <input type="radio" name="traffic" id="s_foot" class="form-control" value="徒歩">
                 </div>
 
             </div>

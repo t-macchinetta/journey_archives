@@ -90,7 +90,9 @@ class JourneysController extends Controller
         $articles->dep_date = $request->dep_date;
         $articles->length = $request->length;
         $articles->cost = $request->cost;
-        $articles->traffic = $request->traffic;
+        $tra = $request->traffic;
+        $traffic = implode(', ',$tra);
+        $articles->traffic = $traffic;
         $articles->save(); 
         return redirect('/');
     }

@@ -61,24 +61,9 @@
                                         <a href="{{ $journey->img5 }}" ><i class="glyphicon glyphicon-picture"></i></a>
                                     @endif
                                 </td>
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->route }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->r_comment }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->destination }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->des_time }}</div>-->
-                                <!--</td>-->
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $journey->des_comment }}</div>-->
-                                <!--</td>-->
-                                
                                 <!--本更新ボタン-->
                                 <td>
+                                @if($journey->email == \Auth::user()->email)
                                     <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         <button type="submit" class="btn btn-primary">
@@ -86,9 +71,11 @@
                                             <i class="glyphicon glyphicon-pencil"></i>
                                         </button>
                                     </form>
+                                @endif
                                 </td>
                                 <!-- 本: 削除ボタン -->
                                 <td>
+                                @if($journey->email == \Auth::user()->email)
                                     <form action="{{ url('journey/'.$journey->id) }}" method="POST">
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
@@ -98,6 +85,7 @@
                                             <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
                                         </button>
                                     </form>
+                                @endif
                                 </td>
                             </tr>
                          @endforeach
