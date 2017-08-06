@@ -52,7 +52,6 @@
                     @else
                         <option value="7日">7日</option>
                     @endif
-                    
                 </select>
 
             </div>

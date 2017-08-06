@@ -31,11 +31,14 @@ Route::post('/journeys', 'JourneysController@store');
 // 旅行の詳細情報を更新するページへ遷移する処理
 Route::post('/journeysedit/{journeys}', 'JourneysController@edit');
 
-// 旅行のレコードを更新する処置
+// 旅行の詳細情報を更新する処置
 Route::post('/journeys/update', 'JourneysController@update');
 
-// レコードを削除する処理
+// 旅行の詳細情報をを削除する処理
 Route::delete('/journey/{journey}', 'JourneysController@destroy');
+
+// 旅行の情報を検索する処理
+Route::post('/result', 'JourneysController@search');
 
 
 // ↓ユーザー認証関連

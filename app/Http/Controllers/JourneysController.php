@@ -26,7 +26,7 @@ class JourneysController extends Controller
         // ↓getをpagenateに変更できる
         // emailでユーザーを指定．新しい順に作成したもののリストを並べる
         $articles = Articles::where('email', '=', \Auth::user()->email)
-                            ->orderBy('created_at', 'desc')
+                            ->orderBy('dep_date', 'desc')
                             ->get();
         return view('articles', ['articles' => $articles]);
     }
@@ -212,6 +212,25 @@ class JourneysController extends Controller
     public function destroy(Journeys $journey){
 	    $journey->delete();
 	    return redirect('/detail');
+    }
+    
+    // 検索の処理
+    public function search(Request $request){
+        $articles = Articles::orderBy('dep_date', 'desc');
+        if($request->dep_date!=""){
+            $articles = $articles->where('dep_date', '=', $request->dep_date);
+        }
+        if($request->length!=""){
+            $articles = $articles->where('length', '=', $request->length);
+        }
+        if($request->cost!=""){
+            $articles = $articles->where('cost', '=', $request->cost);
+        }
+        if($request->traffic!=""){
+            $articles = $articles->where('traffic', 'like', "%{$request->traffic}%");
+        }
+        $articles = $articles->get();
+        return view('result', ['articles' => $articles]);
     }
 
 }
