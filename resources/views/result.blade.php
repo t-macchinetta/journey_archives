@@ -11,7 +11,6 @@
         <!--バリデーションエラーの表示に使用-->
         
         <!--記録一覧-->
-        @if (count($articles) > 0)
             <div class="panel panel-default">
                 <div class="panel-heading"> 
                 </div>
@@ -19,12 +18,16 @@
                     <table class="table table-striped task-table">
                     <!--テーブルヘッダ-->
                         <thead>
+                            @if(count($articles) > 0)
                             <th>検索結果一覧</th>
+                            @else
+                            <th>該当結果なし</th>
+                            @endif
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->
                         <tbody>
-                         @foreach ($articles as $article)
+                        @foreach ($articles as $article)
                             <tr>
                                 <td class="table-text">
                                     <div>{{ $article->title }}</div>
@@ -88,7 +91,6 @@
                     </table>
                 </div>
             </div>
-        @endif
     <!--  ook: 既に登録されてる本 リスト -->
 
 
@@ -96,6 +98,10 @@
         <form action="{{ url('result') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <div class="form-group">
+                <label for="free" class="col-sm-4 control-label">フリーワード</label>
+                <div class="col-sm-6">
+                    <input type="text" name="free" id="free" class="form-control">
+                </div>
                 <label for="word" class="col-sm-4 control-label">地名・交通手段など</label>
                 <div class="col-sm-6">
                     <input type="text" name="word" id="word" class="form-control">

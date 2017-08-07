@@ -163,6 +163,10 @@
         <form action="{{ url('result') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <div class="form-group">
+                <label for="free" class="col-sm-4 control-label">フリーワード</label>
+                <div class="col-sm-6">
+                    <input type="text" name="free" id="free" class="form-control">
+                </div>
                 <label for="word" class="col-sm-4 control-label">地名・交通手段など</label>
                 <div class="col-sm-6">
                     <input type="text" name="word" id="word" class="form-control">

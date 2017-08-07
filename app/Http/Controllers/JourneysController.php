@@ -245,6 +245,19 @@ class JourneysController extends Controller
                                 //  タイトルに検索ワードが含まれる場合も追加
                                  ->orwhere('title', 'like', "%{$request->word}%");
         }
+        if($request->free != ""){
+            // 詳細の出発地経路目的地コメントの中から入力した単語の含まれるレコードを抽出する
+            $journeys = Journeys::where('departure', 'like', "%{$request->free}%")
+                                ->orwhere('route', 'like', "%{$request->free}%")
+                                ->orwhere('destination', 'like', "%{$request->free}%")
+                                ->orwhere('comment', 'like', "%{$request->free}%")
+                                // ユニークIDのみ配列で取得
+                                ->pluck('u_id');
+            // 得たユニークIDの配列で旅行一覧から検索
+            $articles = $articles->whereIn('u_id', $journeys)
+                                //  タイトルに検索ワードが含まれる場合も追加
+                                 ->orwhere('title', 'like', "%{$request->free}%");
+        }
         $articles = $articles->get();
         return view('result', ['articles' => $articles]);
     }
