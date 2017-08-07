@@ -169,7 +169,7 @@ class JourneysController extends Controller
         $journeys->comment = $request->comment;
         
         $journeys->save(); 
-        return redirect('/detail')->with('path',$path);
+        return redirect('/detail');
     }
     // 詳細の更新ページ
     public function edit(Journeys $journeys){
@@ -219,17 +219,29 @@ class JourneysController extends Controller
     // 検索の処理
     public function search(Request $request){
         $articles = Articles::orderBy('dep_date', 'desc');
-        if($request->dep_date!=""){
+        if($request->dep_date != ""){
             $articles = $articles->where('dep_date', '=', $request->dep_date);
         }
-        if($request->length!=""){
+        if($request->length != ""){
             $articles = $articles->where('length', '=', $request->length);
         }
-        if($request->cost!=""){
+        if($request->cost != ""){
             $articles = $articles->where('cost', '=', $request->cost);
         }
-        if($request->traffic!=""){
+        if($request->traffic != ""){
             $articles = $articles->where('traffic', 'like', "%{$request->traffic}%");
+        }
+        if($request->word != ""){
+            // 詳細の出発地経路目的地の中から入力した単語の含まれるレコードを抽出する
+            $journeys = Journeys::where('departure', 'like', "%{$request->word}%")
+                                ->orwhere('route', 'like', "%{$request->word}%")
+                                ->orwhere('destination', 'like', "%{$request->word}%")
+                                // ユニークIDのみ取得
+                                ->pluck('u_id');
+            // 得たユニークIDで旅行一覧から検索
+            $articles = $articles->whereIn('u_id', $journeys)
+                                //  タイトルに含まれる場合も追加
+                                 ->orwhere('title', 'like', "%{$request->word}%");
         }
         $articles = $articles->get();
         return view('result', ['articles' => $articles]);
