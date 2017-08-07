@@ -45,7 +45,7 @@
                                     <div>{{ $article->traffic }}</div>
                                 </td>
                                 <td class="table-text">
-                                    <div>{{ $article->u_id }}</div>
+                                    <div>{{ $article->name }}</div>
                                 </td>
                                 <!--詳細ボタン-->
                                 <td>
