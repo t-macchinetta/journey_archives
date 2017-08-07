@@ -163,7 +163,7 @@
         <form action="{{ url('result') }}" method="POST" class="form-horizontal">
             {{ csrf_field() }}
             <div class="form-group">
-                <label for="word" class="col-sm-4 control-label">フリーワード</label>
+                <label for="word" class="col-sm-4 control-label">地名・交通手段など</label>
                 <div class="col-sm-6">
                     <input type="text" name="word" id="word" class="form-control">
                 </div>
@@ -203,7 +203,7 @@
                     <!--↓項目を追加する，時間とか価格とか-->
                     <!--<input type="text" name="traffic" id="traffic" class="form-control">-->
                     <label for="s_none" class="control-label">指定しない</label>
-                    <input type="radio" name="traffic" id="s_none" class="form-control" value="">
+                    <input type="radio" name="traffic" id="s_none" class="form-control" value="" checked>
                     <label for="s_train" class="control-label">鉄道</label>
                     <input type="radio" name="traffic" id="s_train" class="form-control" value="鉄道">
                     <label for="s_bus" class="control-label">バス</label>

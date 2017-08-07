@@ -218,7 +218,9 @@ class JourneysController extends Controller
     
     // 検索の処理
     public function search(Request $request){
+        // 最近を上にして並べておく
         $articles = Articles::orderBy('dep_date', 'desc');
+        // それぞれ入力されている場合に検索式を実行する
         if($request->dep_date != ""){
             $articles = $articles->where('dep_date', '=', $request->dep_date);
         }
@@ -236,11 +238,11 @@ class JourneysController extends Controller
             $journeys = Journeys::where('departure', 'like', "%{$request->word}%")
                                 ->orwhere('route', 'like', "%{$request->word}%")
                                 ->orwhere('destination', 'like', "%{$request->word}%")
-                                // ユニークIDのみ取得
+                                // ユニークIDのみ配列で取得
                                 ->pluck('u_id');
-            // 得たユニークIDで旅行一覧から検索
+            // 得たユニークIDの配列で旅行一覧から検索
             $articles = $articles->whereIn('u_id', $journeys)
-                                //  タイトルに含まれる場合も追加
+                                //  タイトルに検索ワードが含まれる場合も追加
                                  ->orwhere('title', 'like', "%{$request->word}%");
         }
         $articles = $articles->get();
