@@ -262,4 +262,10 @@ class JourneysController extends Controller
         return view('result', ['articles' => $articles]);
     }
 
+    public function test(){
+        $journeys = Journeys::orderBy('id', 'desc')
+                            ->get();
+        return view('test', ['journeys' => $journeys]);
+    }
+
 }

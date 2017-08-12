@@ -50,8 +50,8 @@
                                     <form action="{{ url('detail') }}" method="POST">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
-                                        <button type="submit" class="btn btn-primary">
-                                            <!--更新-->
+                                        <button type="submit" class="btn btn-primary show_detail">
+                                            <!--表示-->
                                             <i class="glyphicon glyphicon-play"></i>
                                         </button>
                                     </form>
@@ -72,7 +72,7 @@
                                         {{ csrf_field() }}
                                         {{ method_field('DELETE') }}
                                         <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                        <button type="submit" class="btn btn-danger">
+                                        <button type="submit" class="btn btn-danger delete">
                                             <!--削除-->
                                             <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
                                         </button>

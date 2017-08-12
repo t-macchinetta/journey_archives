@@ -40,6 +40,8 @@ Route::delete('/journey/{journey}', 'JourneysController@destroy');
 // 旅行の情報を検索する処理
 Route::post('/result', 'JourneysController@search');
 
+// テスト用ページ
+Route::any('/test', 'JourneysController@test');
 
 // ↓ユーザー認証関連
 Route::auth();
