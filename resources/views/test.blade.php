@@ -20,9 +20,9 @@
                     <!--テーブルヘッダ-->
                         <thead>
                             <th>レコード一覧</th>
-                            <th>{{$id_num}}</th>
+                            <th id="now_id">{{$id_num}}</th>
                             <th id="now_num">test</th>
-                            <th id="r_length">length</th>
+                            <th id="new_num">length</th>
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->

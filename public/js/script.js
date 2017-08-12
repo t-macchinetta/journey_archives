@@ -7,32 +7,27 @@ $(function () {
             return false;
         }
     });
+
+    // 読み込んだレコードのisを順番通り配列に入れる処理    
+    var str = $('#now_id').text();
+    str = str.slice( 1, -1 );
+    var now_id = str.split(',');
+    $('#now_num').text(now_id);
+
+    
     // 詳細の並び替えをできるようにする処理
     $('#sortable').sortable({
         update: function(event,ui){
-            var array1 = [];
+            var new_id = [];
             $('.j_id').each(function(i){
                 text = $(this).text();
-                array1.push(text);
+                new_id.push(text);
             });
-            $('#r_length').text(array1);
+            $('#new_num').text(new_id);
         }
     });
     $('#sortable').disableSelection();
 
-    // $('#sortable').on('change', function(){
-    // $('#r_length').on('click', function(){
-    //     var array1 = [];
-    //     $('.j_id').each(function(i){
-    //         text = $(this).text();
-    //         array1.push(text);
-    //     });
-    //     $('#r_length').text(array1);
-    // });
 
-    $('.j_id').on('click', function() {
-        var now_id = $(this).text();
-        $('#now_num').text(now_id);
-    });
 
 });
