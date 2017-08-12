@@ -8,9 +8,31 @@ $(function () {
         }
     });
     // 詳細の並び替えをできるようにする処理
-    $('#sortable').sortable();
+    $('#sortable').sortable({
+        update: function(event,ui){
+            var array1 = [];
+            $('.j_id').each(function(i){
+                text = $(this).text();
+                array1.push(text);
+            });
+            $('#r_length').text(array1);
+        }
+    });
     $('#sortable').disableSelection();
 
+    // $('#sortable').on('change', function(){
+    // $('#r_length').on('click', function(){
+    //     var array1 = [];
+    //     $('.j_id').each(function(i){
+    //         text = $(this).text();
+    //         array1.push(text);
+    //     });
+    //     $('#r_length').text(array1);
+    // });
 
+    $('.j_id').on('click', function() {
+        var now_id = $(this).text();
+        $('#now_num').text(now_id);
+    });
 
 });

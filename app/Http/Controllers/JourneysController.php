@@ -262,10 +262,13 @@ class JourneysController extends Controller
         return view('result', ['articles' => $articles]);
     }
 
+    // テストページの表示
     public function test(){
         $journeys = Journeys::orderBy('id', 'desc')
                             ->get();
-        return view('test', ['journeys' => $journeys]);
+        $id_num = Journeys::orderBy('id', 'desc')
+                            ->pluck('id');
+        return view('test', ['journeys' => $journeys])->with('id_num',$id_num);
     }
 
 }

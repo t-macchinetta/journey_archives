@@ -20,14 +20,17 @@
                     <!--テーブルヘッダ-->
                         <thead>
                             <th>レコード一覧</th>
+                            <th>{{$id_num}}</th>
+                            <th id="now_num">test</th>
+                            <th id="r_length">length</th>
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->
                         <tbody id="sortable">
                          @foreach ($journeys as $journey)
-                            <tr>
+                            <tr id="test">
                                 <td class="table-text">
-                                    <div>{{ $journey->id }}</div>
+                                    <div class="j_id">{{ $journey->id }}</div>
                                     <div>{{ $journey->u_id }}</div>
                                 </td>
                                 <td class="table-text">
