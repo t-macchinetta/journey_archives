@@ -5,6 +5,7 @@
     @include('common.errors')
         <form action="{{ url('journeys/update') }}" method="POST">
             <input type="hidden" name="u_id" value="{{$journey->u_id}}">
+            <input type="text" name="id" value="{{$journey->id}}">
             <!-- 出発地関連 -->
             <div class="form-group">
                 <label for="dep_time">出発時間*</label>

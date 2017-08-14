@@ -16,13 +16,18 @@
                 <div class="panel-heading"> 
                 </div>
                 <div class="panel-body">
+                    <div id="now_id" hidden>{{$id_num}}</div>
+                    <form action="{{ url('sort') }}" method="POST" id="sort">
+                        {{ csrf_field() }}
+                        <input type="hidden" id="now_num" name="now_num"/>
+                        <input type="hidden" id="new_num" name="new_num"/>
+                    </form>
                     <table class="table table-striped task-table">
                     <!--テーブルヘッダ-->
                         <thead>
                             <th>レコード一覧</th>
-                            <th id="now_id">{{$id_num}}</th>
-                            <th id="now_num">test</th>
-                            <th id="new_num">length</th>
+                            <th id="test">test</th>
+                            <!--<th id="new_num">length</th>-->
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->

@@ -12,8 +12,8 @@ $(function () {
     var str = $('#now_id').text();
     str = str.slice( 1, -1 );
     var now_id = str.split(',');
-    $('#now_num').text(now_id);
-
+        // $('#now_num').text(now_id);
+    var old_id = now_id.join();
     
     // 詳細の並び替えをできるようにする処理
     $('#sortable').sortable({
@@ -23,7 +23,11 @@ $(function () {
                 text = $(this).text();
                 new_id.push(text);
             });
-            $('#new_num').text(new_id);
+            var neo_id = new_id.join();
+            $('#now_num').val(old_id);
+            $('#new_num').val(neo_id);
+            // $('#sort').submit();
+            $('#test').text(neo_id);
         }
     });
     $('#sortable').disableSelection();

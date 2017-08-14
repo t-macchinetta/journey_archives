@@ -43,6 +43,9 @@ Route::post('/result', 'JourneysController@search');
 // テスト用ページ
 Route::any('/test', 'JourneysController@test');
 
+
+Route::post('/sort', 'JourneysController@sort');
+
 // ↓ユーザー認証関連
 Route::auth();
 Route::get('/home', 'HomeController@index');
