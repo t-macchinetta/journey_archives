@@ -153,8 +153,8 @@ class JourneysController extends Controller
                 $fileName[$i]= time()."@".$fileName[$i];
                 $image[$i] = Image::make($input['img' . $i]->getRealPath());
                 $image[$i]->save(public_path() . '/images/' . $fileName[$i]);
-            $path[$i] = '/images/' . $fileName[$i];
-            $journeys->{'img'.$i} = 'images/' . $fileName[$i];
+                $path[$i] = '/images/' . $fileName[$i];
+                $journeys->{'img'.$i} = 'images/' . $fileName[$i];
             }
         }
         
@@ -273,9 +273,6 @@ class JourneysController extends Controller
     
     // 順番変更の処理
     public function sort(Request $request){
-        // 送られたIDの配列で旅行一覧から検索
-        // $journeys = $journeys->whereIn('u_id', $request->now_num)
-        //                         ->get();
         // 一時変更に必要な乱数
         $str="";
         for($i=0; $i<8; $i++){
@@ -286,17 +283,17 @@ class JourneysController extends Controller
         $new_num = explode (",", $request->new_num);
         for($i=0; $i<=count($request->now_num); $i++){
             // 乱数に配列の長さ分足した数をつくる
-            $str_num = $str + $i;
+            $str_now_num = $str + $i;
             // 変更前の配列の最初からレコードを抽出する
             $journeys = Journeys::find($now_num[$i]);
             // idを変更する
-            $journeys->id = $str_num;
-            // $journeys->id = $new_num[$i];
+            $journeys->id = $str_now_num;
+                // $journeys->id = $new_num[$i];
             $journeys->save();
         }
         for($i=0; $i<=count($request->now_num); $i++){
-            $str_num = $str + $i;
-            $journeys = Journeys::find($str_num);
+            $str_new_num = $str + $i;
+            $journeys = Journeys::find($str_new_num);
             $journeys->id = $new_num[$i];
             $journeys->save();
         }
