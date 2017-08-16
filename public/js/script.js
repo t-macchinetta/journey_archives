@@ -1,4 +1,15 @@
 $(function () {
+    // 駅名の入力補助
+    // var dateTimeApp;// 日付入力パーツ
+    var stationApp1;// 駅名入力パーツ#1
+    var stationApp2;// 駅名入力パーツ#2
+    // 駅名入力パーツ#1初期化
+    stationApp1 = new expGuiStation(document.getElementById("departure"));
+    stationApp1.dispStation();
+    //駅名入力パーツ#2初期化
+    stationApp2 = new expGuiStation(document.getElementById("destination"));
+    stationApp2.dispStation();
+ 
     // 削除ボタンを押したら確認アラート表示
     $('.delete').on('click', function () {
         if(window.confirm("削除しますか?")) {
@@ -31,7 +42,7 @@ $(function () {
         }
     });
     $('#sortable').disableSelection();
-
+    // 並び替えここまで(工事中)
 
 
 });
