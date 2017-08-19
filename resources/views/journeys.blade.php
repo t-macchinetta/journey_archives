@@ -95,8 +95,7 @@
             </div>
         @endif
     <!--  ook: 既に登録されてる本 リスト -->
-
-        
+        @if($journey->email == \Auth::user()->email)
         <!-- 本登録フォーム -->
         <!--urlをつけると自動的にドメインを追加してくれる-->
         <form action="{{ url('journeys') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" accept="image/*">
@@ -104,6 +103,7 @@
             {{ csrf_field() }}
             {{ $unique }}
             <input type="hidden" name="u_id" id="u_id" value="{{$unique}}">
+            <!--<div id="station0"></div>-->
             <!--<input type="hidden" name="u_id" id="u_id" value="1">-->
             <!-- 本のタイトル -->
             <div class="form-group">
@@ -115,7 +115,8 @@
                 <label for="departure" class="col-sm-4 control-label">出発地*</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
-                    <input type="text" name="departure" id="departure" class="form-control">
+                    <div id="station0" class="form-control"></div>
+                    <input type="hidden" name="departure" id="departure" value="""">
                 </div>
                 <!--経路関連-->
                 <label for="route" class="col-sm-4 control-label">経路*</label>
@@ -130,7 +131,8 @@
                 <label for="destination" class="col-sm-4 control-label">目的地*</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
-                    <input type="text" name="destination" id="destination" class="form-control">
+                    <div id="station1" class="form-control"></div>
+                    <input type="hidden" name="destination" id="destination" value="""">
                 </div>
                 <!--コメント-->
                 <label for="comment" class="col-sm-4 control-label">コメント</label>
@@ -151,13 +153,13 @@
             <!-- 本登録ボタン -->
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-6">
-                    <button type="submit" class="btn btn-default">
+                    <button type="submit" class="btn btn-default" id="submit">
                         <i class="fa fa-plus glyphicon glyphicon-plus"></i> Save
                     </button>
                 </div>
             </div>
         </form>
-
+        @endif
     </div>
 @endsection
 
