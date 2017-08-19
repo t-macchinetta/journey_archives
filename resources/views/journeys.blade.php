@@ -95,7 +95,6 @@
             </div>
         @endif
     <!--  ook: 既に登録されてる本 リスト -->
-        @if($journey->email == \Auth::user()->email)
         <!-- 本登録フォーム -->
         <!--urlをつけると自動的にドメインを追加してくれる-->
         <form action="{{ url('journeys') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" accept="image/*">
@@ -159,7 +158,6 @@
                 </div>
             </div>
         </form>
-        @endif
     </div>
 @endsection
 
