@@ -16,6 +16,14 @@
                 <div class="panel-heading"> 
                 </div>
                 <div class="panel-body">
+                    <div id="std_id" hidden>{{$num}}</div>
+                    <form action="{{ url('sort') }}" method="POST" id="sort">
+                        {{ csrf_field() }}
+                        <input type="hidden" id="now_num" name="now_num"/>
+                        <input type="hidden" id="new_num" name="new_num"/>
+                        <!--<input type="hidden" id="email" name="email" value="{{ Session::get('email') }}"/>-->
+                    </form>
+
                     <table class="table table-striped task-table">
                     <!--テーブルヘッダ-->
                         <thead>
@@ -23,19 +31,24 @@
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->
+                        @if($email == \Auth::user()->email)
+                        <tbody id=sortable>
+                        @else
                         <tbody>
+                        @endif
                          @foreach ($journeys as $journey)
                             <tr>
                                 <td class="table-text">
-                                    <div>{{ $journey->dep_time }}</div>
-                                    <div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i></div>
-                                    <div>{{ $journey->des_time }}</div>
+                                    <div class="j_id" hidden>{{ $journey->numbers }}</div>
+                                    <div>{{ $journey->dep_time }} &nbsp;{{ $journey->departure }}</div>
+                                    <div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i> &nbsp;{{ $journey->route }}</div>
+                                    <div>{{ $journey->des_time }} &nbsp;{{ $journey->destination }}</div>
                                 </td>
-                                <td class="table-text">
-                                    <div>{{ $journey->departure }}</div>
-                                    <div>{{ $journey->route }}</div>
-                                    <div>{{ $journey->destination }}</div>
-                                </td>
+                                <!--<td class="table-text">-->
+                                    <!--<div>{{ $journey->departure }}</div>-->
+                                    <!--<div>{{ $journey->route }}</div>-->
+                                    <!--<div>{{ $journey->destination }}</div>-->
+                                <!--</td>-->
                                 <td class="table-text">
                                     <div>{{ $journey->comment }}</div>
                                     <!--写真のアイコン表示-->
@@ -96,11 +109,14 @@
         @endif
     <!--  ook: 既に登録されてる本 リスト -->
         <!-- 本登録フォーム -->
+        @if($email == \Auth::user()->email)
         <!--urlをつけると自動的にドメインを追加してくれる-->
         <form action="{{ url('journeys') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" accept="image/*">
             <!--↓phpのsession的なチェックをする，セキュリティ的に使用すると良い-->
             {{ csrf_field() }}
-            {{ $unique }}
+            <!--{{ $unique }}-->
+            <!--{{ $num }}-->
+            <!--{{ $email }}-->
             <input type="hidden" name="u_id" id="u_id" value="{{$unique}}">
             <!--<div id="station0"></div>-->
             <!--<input type="hidden" name="u_id" id="u_id" value="1">-->
@@ -114,8 +130,8 @@
                 <label for="departure" class="col-sm-4 control-label">出発地*</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
-                    <div id="station0" class="form-control"></div>
-                    <input type="hidden" name="departure" id="departure" value="""">
+                    <!--<div id="station0" class="form-control"></div>-->
+                    <input type="text" name="departure" id="departure" value="" class="form-control">
                 </div>
                 <!--経路関連-->
                 <label for="route" class="col-sm-4 control-label">経路*</label>
@@ -130,8 +146,8 @@
                 <label for="destination" class="col-sm-4 control-label">目的地*</label>
                 <div class="col-sm-6">
                     <!--↓項目を追加する，時間とか価格とか-->
-                    <div id="station1" class="form-control"></div>
-                    <input type="hidden" name="destination" id="destination" value="""">
+                    <!--<div id="station1" class="form-control"></div>-->
+                    <input type="text" name="destination" id="destination" value="" class="form-control">
                 </div>
                 <!--コメント-->
                 <label for="comment" class="col-sm-4 control-label">コメント</label>
@@ -158,6 +174,7 @@
                 </div>
             </div>
         </form>
+        @endif
     </div>
 @endsection
 

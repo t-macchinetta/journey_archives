@@ -15,7 +15,9 @@
     <!--<link href="css/test.css" rel="stylesheet" type="text/css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <link class="css" rel="stylesheet" type="text/css" href="js/expCss/expGuiStation.css">
+    
+    <!--駅名予測入力用-->
+    <!--<link class="css" rel="stylesheet" type="text/css" href="js/expCss/expGuiStation.css">-->
 
     <style>
         body {
@@ -49,7 +51,7 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/home') }}">Home</a></li>
+                    <!--<li><a href="{{ url('/home') }}">Home</a></li>-->
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -80,10 +82,14 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <!--jqueryui-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>  
+    <!--自作jsファイル-->
     <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/expGuiStation.js?key=LE_hJATfqeEhynen" charset="UTF-8"></script>
+    <!--駅名入力補助用-->
+    <!--<script type="text/javascript" src="js/expGuiStation.js?key=LE_hJATfqeEhynen" charset="UTF-8"></script>-->
 
 </body>
 </html>

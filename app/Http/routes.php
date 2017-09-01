@@ -43,7 +43,7 @@ Route::post('/result', 'JourneysController@search');
 // テスト用ページ
 Route::any('/test', 'JourneysController@test');
 
-
+// 並び替え処理
 Route::post('/sort', 'JourneysController@sort');
 
 // ↓ユーザー認証関連

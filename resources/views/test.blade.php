@@ -16,7 +16,7 @@
                 <div class="panel-heading"> 
                 </div>
                 <div class="panel-body">
-                    <div id="now_id" hidden>{{$id_num}}</div>
+                    <div id="std_id" hidden>{{$num}}</div>
                     <form action="{{ url('sort') }}" method="POST" id="sort">
                         {{ csrf_field() }}
                         <input type="hidden" id="now_num" name="now_num"/>
@@ -26,8 +26,8 @@
                     <!--テーブルヘッダ-->
                         <thead>
                             <th>レコード一覧</th>
-                            <th id="test">test</th>
-                            <!--<th id="new_num">length</th>-->
+                            <th id="test1">test</th>
+                            <th id="test2">length</th>
                             <th>&nbsp;</th>
                         </thead>
                         <!-- テーブル本体 -->
@@ -35,7 +35,8 @@
                          @foreach ($journeys as $journey)
                             <tr id="test">
                                 <td class="table-text">
-                                    <div class="j_id">{{ $journey->id }}</div>
+                                    <div>{{ $journey->id }}</div>
+                                    <div class="j_id">{{ $journey->numbers }}</div>
                                     <div>{{ $journey->u_id }}</div>
                                 </td>
                                 <td class="table-text">

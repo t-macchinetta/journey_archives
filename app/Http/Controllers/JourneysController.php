@@ -7,6 +7,7 @@ use App\Http\Requests;
 // ↓複数テーブルを使用する場合にはテーブルに対応したモデルをすべて読み込む必要がある
 use App\Journeys;
 use App\Articles;
+use DB;
 // ↓条件指定のため必要
 use Validator;
 // ↓セッションを使用するため
@@ -109,18 +110,32 @@ class JourneysController extends Controller
         if($request->u_id != ""){
             session::put('unique', $request->u_id);
         }
+        if($request->email != ""){
+            session::put('email', $request->email);
+        }
+
         // ↓セッションの値を変数に格納
         $unique = session::get('unique');
+        $email = session::get('email');
         // ↓セッションがからの場合はトップページにリダイレクト
         if($unique == ""){
     	    return redirect('/');
         }else{
             // ↓ユニークIDで検索し，合致するものを並べて表示
             $journeys = Journeys::where('u_id', '=', $unique)
-                                ->orderBy('created_at', 'asc')
+            // numbers順(基本登録した順)で並べる
+                                ->orderBy('numbers', 'asc')
                                 ->get();
+            // 並び順の配列を得る
+            $num = Journeys::where('u_id', '=', $unique)
+                                ->orderBy('numbers', 'asc')
+                                ->pluck('numbers');
+            // $email = $request->email;
+        // return view('test', ['journeys' => $journeys])->with('num',$num);
+
             // ↓変数を持ったまま詳細表示へ移動，登録時にinput hddenに値に埋め込む
-            return view('journeys', ['journeys' => $journeys])->with('unique',$unique);
+            // return view('journeys', ['journeys' => $journeys])->with('unique',$unique);
+            return view('journeys', ['journeys' => $journeys],compact('unique','num', 'email'));
         }
     }
     
@@ -167,8 +182,11 @@ class JourneysController extends Controller
         $journeys->des_time = $request->des_time;
         $journeys->destination = $request->destination;
         $journeys->comment = $request->comment;
-        
+        $journeys->save();
+        // numbersカラムにidの値をコピー
+        $journeys->numbers = $journeys->id;
         $journeys->save(); 
+
         return redirect('/detail');
     }
     // 詳細の更新ページ
@@ -264,40 +282,47 @@ class JourneysController extends Controller
 
     // テストページの表示
     public function test(){
-        $journeys = Journeys::orderBy('id', 'desc')
+        $journeys = Journeys::orderBy('numbers', 'desc')
                             ->get();
-        $id_num = Journeys::orderBy('id', 'desc')
-                            ->pluck('id');
-        return view('test', ['journeys' => $journeys])->with('id_num',$id_num);
+        $num = Journeys::orderBy('numbers', 'desc')
+                            ->pluck('numbers');
+        return view('test', ['journeys' => $journeys])->with('num',$num);
     }
     
-    // 順番変更の処理
+    // 詳細ページで順番を入れ替える処理
     public function sort(Request $request){
-        // 一時変更に必要な乱数
+        // 変更するために必要な乱数(9桁，intの最大値を超えないように)
         $str="";
-        for($i=0; $i<8; $i++){
+        for($i=0; $i<9; $i++){
             $str.=mt_rand(0,9);
         }
-        // 変更前後の配列
+        // もともとの順番の配列(5,4,3,2,1)
         $now_num = explode (",", $request->now_num);
+        // 入れ替えた順番の配列(3,4,5,2,1)
         $new_num = explode (",", $request->new_num);
-        for($i=0; $i<=count($request->now_num); $i++){
-            // 乱数に配列の長さ分足した数をつくる
-            $str_now_num = $str + $i;
-            // 変更前の配列の最初からレコードを抽出する
-            $journeys = Journeys::find($now_num[$i]);
-            // idを変更する
-            $journeys->id = $str_now_num;
-                // $journeys->id = $new_num[$i];
-            $journeys->save();
-        }
-        for($i=0; $i<=count($request->now_num); $i++){
+        // 変更する配列分の長さ繰り返す
+        for($i=0; $i<count($now_num); $i++){
+            // 乱数から1ずつ足した数をつくる(小さい順に並べるため)
             $str_new_num = $str + $i;
-            $journeys = Journeys::find($str_new_num);
-            $journeys->id = $new_num[$i];
-            $journeys->save();
+            // 並び替えた配列(3,4,5,2,1)の最初からレコードを抽出する
+            // $journeys = Journeys::find($new_num[$i])
+            $journeys = Journeys::where('numbers', $new_num[$i])
+            // 一時的に乱数を用いた数に変更する(3->99,4->98,5->97,2->96,1->95)(処理中の重複を防ぐため)
+                        // ->update(['id' => $str_new_num]);
+                        ->update(['numbers' => $str_new_num]);
         }
-        return redirect('/test');
+
+        // 順番を入れ替えて乱数を設定したレコードを，正しい順番に書き換える
+        for($i=0; $i<count($now_num); $i++){
+            // 再度前回の乱数から1ずつ足した数で検索
+            $str_now_num = $str + $i;
+            // $journeys = Journeys::find($str_new_num)
+            $journeys = Journeys::where('numbers', $str_now_num)
+            // もともとの順番に書き換え(99->5, 98->4, 97->3, 96->2, 95->1)
+            // 結果(3->99->5, 4->98->4, 5->97->3, 2->96->2, 1->95->1)
+                        ->update(['numbers' => $now_num[$i]]);
+        }
+        return redirect('/detail');
 
     }
 

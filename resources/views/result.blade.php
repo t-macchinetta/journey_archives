@@ -53,6 +53,7 @@
                                     <form action="{{ url('detail') }}" method="POST">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
+                                        <input type="hidden" name="email" value="{{ $article->email }}" />
                                         <button type="submit" class="btn btn-primary">
                                             <!--更新-->
                                             <i class="glyphicon glyphicon-play"></i>

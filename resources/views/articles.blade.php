@@ -41,15 +41,16 @@
                                 <td class="table-text">
                                     <div>{{ $article->traffic }}</div>
                                 </td>
-                                <td class="table-text">
-                                    <div>{{ $article->u_id }}</div>
-                                </td>
+                                <!--<td class="table-text">-->
+                                <!--    <div>{{ $article->u_id }}</div>-->
+                                <!--</td>-->
                                 <!--詳細ボタン-->
                                 <td>
                                     <!--.$article->u_id)-->
                                     <form action="{{ url('detail') }}" method="POST">
                                         {{ csrf_field() }}
                                         <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
+                                        <input type="hidden" name="email" value="{{ $article->email }}" />
                                         <button type="submit" class="btn btn-primary show_detail">
                                             <!--表示-->
                                             <i class="glyphicon glyphicon-play"></i>
@@ -92,7 +93,7 @@
         <form action="{{ url('articles') }}" method="POST" class="form-horizontal">
             <!--↓phpのsession的なチェックをする，セキュリティ的に使用すると良い-->
             {{ csrf_field() }}
-            {{ Auth::user()->name }}
+            <!--{{ Auth::user()->name }}-->
         <!-- 本のタイトル -->
             <div class="form-group">
                 <label for="title" class="col-sm-4 control-label">タイトル*</label>
