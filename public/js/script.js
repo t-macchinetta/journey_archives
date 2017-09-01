@@ -45,6 +45,7 @@ $(function () {
     $('#sortable').sortable({
         // y軸のみ移動
         axis: 'y',
+        handle: 'span',
         update: function(event,ui){
             // 読み込んだレコードのidを順番通り配列に入れる処理    
             var str = $('#std_id').text();

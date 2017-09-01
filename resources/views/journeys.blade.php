@@ -38,12 +38,12 @@
                         @endif
                          @foreach ($journeys as $journey)
                             <tr>
-                                <td class="table-text">
+                                <td class="table-text"><span style="cursor:ns-resize;">
                                     <div class="j_id" hidden>{{ $journey->numbers }}</div>
                                     <div>{{ $journey->dep_time }} &nbsp;{{ $journey->departure }}</div>
                                     <div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i> &nbsp;{{ $journey->route }}</div>
                                     <div>{{ $journey->des_time }} &nbsp;{{ $journey->destination }}</div>
-                                </td>
+                                </span></td>
                                 <!--<td class="table-text">-->
                                     <!--<div>{{ $journey->departure }}</div>-->
                                     <!--<div>{{ $journey->route }}</div>-->
