@@ -1,4 +1,7 @@
 $(function () {
+    // var h = $('.record').height();
+    // $('.time').height(h);
+
     // 駅名の入力補助
     // var dateTimeApp;// 日付入力パーツ
     // var stationApp0;// 駅名入力パーツ#0
@@ -40,6 +43,13 @@ $(function () {
         }
     });
 
+//     $('.record').exResize({
+// 	contentsWatch : true,
+// 	callback : function () {
+//         var h = $('.record').height();
+//         $('.time').height(h);
+// 	    }
+//     });
 
     // 詳細の並び替えをできるようにする処理
     $('#sortable').sortable({
@@ -88,5 +98,10 @@ $(function () {
     $('#sortable').disableSelection();
     // 並び替えここまで
 
+    $(document).on("click", ".show_commnet", function(){
+        // alert("test");
+        $(this).parents('.record').find('.comment_pics').slideToggle();
+
+    });
 
 });

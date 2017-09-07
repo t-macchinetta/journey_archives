@@ -22,6 +22,7 @@
     <style>
         body {
             font-family: 'Lato';
+            padding-top: 71px;
         }
 
         .fa-btn {
@@ -30,7 +31,7 @@
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -85,7 +86,9 @@
     <!--jqueryui-->
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>  
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
+    <!--exResize-->
+    <!--<script type="text/javascript" src="jquery.exresize.js"></script>-->
     <!--自作jsファイル-->
     <script type="text/javascript" src="js/script.js"></script>
     <!--駅名入力補助用-->

@@ -5,28 +5,27 @@
 
     <!-- Bootstrap の定形コード... -->
 
-    <div class="panel-body">
+    <!--<div class="panel-body">-->
         <!--バリデーションエラーの表示に使用-->
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
 
         <!--記録一覧-->
         @if (count($journeys) > 0)
-            <div>
-                <div>
-                    <div id="std_id" hidden>{{$num}}</div>
-                    <form action="{{ url('sort') }}" method="POST" id="sort">
-                        {{ csrf_field() }}
-                        <input type="hidden" id="now_num" name="now_num"/>
-                        <input type="hidden" id="new_num" name="new_num"/>
+            <!--処理に必要なデータ(非表示)-->
+            <div id="std_id" hidden>{{$num}}</div>
+                <form action="{{ url('sort') }}" method="POST" id="sort">
+                    {{ csrf_field() }}
+                    <input type="hidden" id="now_num" name="now_num"/>
+                    <input type="hidden" id="new_num" name="new_num"/>
                         <!--<input type="hidden" id="email" name="email" value="{{ Session::get('email') }}"/>-->
-                    </form>
-
+                </form>
+                <div class = "flex-row">
                     <div class = "main">
                         <div>
                             <div>レコード一覧</div>
                         </div>
-                        <!-- テーブル本体 -->
+                        <!-- リスト本体，レコードがあるときのみ表示 -->
                         @if($email == \Auth::user()->email)
                         <div id = "sortable" class = "list">
                         @else
@@ -35,126 +34,105 @@
                          @foreach ($journeys as $journey)
                                 <div class="record">
                                     <div class = "j_id" hidden>{{ $journey->numbers }}</div>
+                                    <!--ログインしたユーザーが記録したもののみソート可能にする-->
                                     @if($email == \Auth::user()->email)
-                                    <span style="cursor:ns-resize;" class = "flex">
+                                    <span class = "flex">
                                     @endif
-                                    <div class = "time">
-                                        <div class = "dep_t">{{ $journey->dep_time }}</div>
-                                        <div class = "des_t">{{ $journey->des_time }}</div>
-                                    </div>
                                     @if($email == \Auth::user()->email)
                                     </span>
                                     @endif
-                                    <div class = "place">
-                                        <div class = "dep_p">{{ $journey->departure }}</div>
-                                        <div class = "des_p">{{ $journey->destination }}</div>
-                                    </div>
                                     <div class = "detail">
+                                        <div class = "time">
+                                        @if($email == \Auth::user()->email)
+                                        <span class = "flex">
+                                        @endif
+                                            <div class = "dep_t">{{ $journey->dep_time }}</div>
+                                        @if($email == \Auth::user()->email)
+                                        </span>
+                                        @endif
+                                            <div class = "dep_p">{{ $journey->departure }}</div>
+                                        </div>
+                                        <div class = "flex">
+                                        @if($email == \Auth::user()->email)
+                                        <span class = "flex">
+                                        @endif
+                                        <div class = "blank"></div>
+                                        @if($email == \Auth::user()->email)
+                                        </span>
+                                        @endif
                                         <div class = "info">
-                                            <div class = "route">
-                                                {{ $journey->route }}
-                                                <button type = "submit" class="btn btn-primary j_btn">
-                                                    <!--コメント-->
-                                                    <i class = "glyphicon glyphicon-comment"></i>
-                                                </button>
+                                            <div class = "info2">
+                                                <div class = "route">
+                                                    {{ $journey->route }}
+                                                    <i class = "glyphicon glyphicon-comment show_commnet"></i>
+                                                </div>
+                                                <div class = "buttons">
+                                                    <!--記録者のみ編集と削除のボタン表示-->
+                                                    @if($journey->email == \Auth::user()->email)
+                                                    <div class = "edit"> 
+                                                        <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            <button type="submit" class="btn btn-primary j_btn">
+                                                                <!--更新-->
+                                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    <div class = "delete">
+                                                        <form action="{{ url('journey/'.$journey->id) }}" method="POST">
+                                                            {{ csrf_field() }}
+                                                            {{ method_field('DELETE') }}
+                                                            <!--bootstrapのcomponentsの値をクラスに追加する-->
+                                                            <button type="submit" class="btn btn-danger delete j_btn">
+                                                                <!--削除-->
+                                                                <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                    @endif
+                                                </div>
                                             </div>
-                                            <div class = "buttons">
-                                                @if($journey->email == \Auth::user()->email)
-                                                <div class = "edit"> 
-                                                    <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        <button type="submit" class="btn btn-primary j_btn">
-                                                            <!--更新-->
-                                                            <i class="glyphicon glyphicon-pencil"></i>
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div class = "delete">
-                                                    <form action="{{ url('journey/'.$journey->id) }}" method="POST">
-                                                        {{ csrf_field() }}
-                                                        {{ method_field('DELETE') }}
-                                                        <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                                        <button type="submit" class="btn btn-danger delete j_btn">
-                                                            <!--削除-->
-                                                            <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
-                                                        </button>
-                                                    </form>
-                                                </div>
+                                            <!--コメントと写真アイコンは初期非表示-->
+                                            <div class = "comment_pics" hidden>
+                                                @if(isset($journey->comment))
+                                                    <div class = "comment">{{ $journey->comment }}</div>
+                                                @endif
+                                                @if(isset($journey->img1))
+                                                    <a href = "{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                @endif
+                                                @if(isset($journey->img2))
+                                                    <a href = "{{ $journey->img2 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                @endif
+                                                @if(isset($journey->img3))
+                                                    <a href = "{{ $journey->img3 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                @endif
+                                                @if(isset($journey->img4))
+                                                    <a href="{{ $journey->img4 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                @endif
+                                                @if(isset($journey->img5))
+                                                    <a href="{{ $journey->img5 }}" ><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class = "comment" hidden>{{ $journey->comment }}</div>
+                                        </div>
+                                        <div class = "time">
+                                            @if($email == \Auth::user()->email)
+                                            <span class = "flex">
+                                            @endif
+                                            <div class = "des_t">{{ $journey->des_time }}</div>
+                                            @if($email == \Auth::user()->email)
+                                            </span>
+                                            @endif
+                                            <div class = "des_p">{{ $journey->destination }}</div>
+                                        </div>
                                     </div>
-
-                                    
-                                    
-                                    
-                                    <!--<div class = "schedule">-->
-                                    <!--    <div class = "dep_tp">-->
-                                    <!--        <div class = "time">{{ $journey->dep_time }}</div>-->
-                                    <!--        <div class = "place">{{ $journey->departure }}</div>-->
-                                    <!--    </div>-->
-                                        <!--<div><i class="fa fa-plus glyphicon glyphicon-menu-down"></i> &nbsp;</div>-->
-                                    <!--    <div class = "des_tp">-->
-                                    <!--        <div class = "time">{{ $journey->des_time }}</div>-->
-                                    <!--        <div class = "place">{{ $journey->destination }}</div>-->
-                                    <!--    </div>-->
-                                    <!--</div>-->
-                                    <!--@if($email == \Auth::user()->email)-->
-                                    <!--</span>-->
-                                    <!--@endif-->
-                                    <!--<div class = "route">{{ $journey->route }}</div>-->
-                                    <!--<button type = "submit" class="btn btn-primary j_btn">-->
-                                        <!--コメント-->
-                                    <!--    <i class = "glyphicon glyphicon-comment"></i>-->
-                                    <!--</button>-->
-                                    <!--<div hidden>{{ $journey->comment }}</div>-->
-                                    <!--@if(isset($journey->img1))-->
-                                    <!--    <a href = "{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>-->
-                                    <!--@endif-->
-                                    <!--@if(isset($journey->img2))-->
-                                    <!--    <a href = "{{ $journey->img2 }}" ><i class="glyphicon glyphicon-picture"></i></a>-->
-                                    <!--@endif-->
-                                    <!--@if(isset($journey->img3))-->
-                                    <!--    <a href = "{{ $journey->img3 }}" ><i class="glyphicon glyphicon-picture"></i></a>-->
-                                    <!--@endif-->
-                                    <!--@if(isset($journey->img4))-->
-                                    <!--    <a href="{{ $journey->img4 }}" ><i class="glyphicon glyphicon-picture"></i></a>-->
-                                    <!--@endif-->
-                                    <!--@if(isset($journey->img5))-->
-                                    <!--    <a href="{{ $journey->img5 }}" ><i class="glyphicon glyphicon-picture"></i></a>-->
-                                    <!--@endif-->
-
-                                    <!--<div class = "buttons">-->
-                                    <!--@if($journey->email == \Auth::user()->email)-->
-                                    <!--<div class = "edit"> -->
-                                    <!--    <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">-->
-                                    <!--        {{ csrf_field() }}-->
-                                    <!--        <button type="submit" class="btn btn-primary j_btn">-->
-                                                <!--更新-->
-                                    <!--            <i class="glyphicon glyphicon-pencil"></i>-->
-                                    <!--        </button>-->
-                                    <!--    </form>-->
-                                    <!--</div>-->
-                                    <!--<div class = "delete">-->
-                                    <!--    <form action="{{ url('journey/'.$journey->id) }}" method="POST">-->
-                                    <!--        {{ csrf_field() }}-->
-                                    <!--        {{ method_field('DELETE') }}-->
-                                            <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                    <!--        <button type="submit" class="btn btn-danger delete j_btn">-->
-                                                <!--削除-->
-                                    <!--            <i class="fa fa-trash glyphicon glyphicon-trash"></i> -->
-                                    <!--        </button>-->
-                                    <!--    </form>-->
-                                    <!--</div>-->
-                                    <!--@endif-->
-                                    <!--</div>-->
                                 </div>
                          @endforeach
                         </div>
                     </div>
                 </div>
-            </div>
+        @else
+            <div>まだデータがありません．追加ボタンを押して記録しましょう．</div>
         @endif
     <!--  ook: 既に登録されてる本 リスト -->
         <!-- 本登録フォーム -->
@@ -224,7 +202,7 @@
             </div>
         </form>
         @endif
-    </div>
+    <!--</div>-->
 @endsection
 
 
