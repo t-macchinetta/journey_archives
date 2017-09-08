@@ -1,4 +1,5 @@
-$(function () {
+// $(function () {
+$(window).load(function () {
     // var h = $('.record').height();
     // $('.time').height(h);
 
@@ -43,13 +44,10 @@ $(function () {
         }
     });
 
-//     $('.record').exResize({
-// 	contentsWatch : true,
-// 	callback : function () {
-//         var h = $('.record').height();
-//         $('.time').height(h);
-// 	    }
-//     });
+    // 検索ボタンをクリック時にフォーム表示
+    $('#search').on('click', function () {
+        $('.search_form').toggle();
+    });
 
     // 詳細の並び替えをできるようにする処理
     $('#sortable').sortable({
@@ -98,10 +96,10 @@ $(function () {
     $('#sortable').disableSelection();
     // 並び替えここまで
 
-    $(document).on("click", ".show_commnet", function(){
+    // コメントのアイコンをクリックするとコメント内容を表示
+    $(document).on("click", ".show_comment", function(){
         // alert("test");
         $(this).parents('.record').find('.comment_pics').slideToggle();
-
     });
 
 });

@@ -64,7 +64,7 @@
                                             <div class = "info2">
                                                 <div class = "route">
                                                     {{ $journey->route }}
-                                                    <i class = "glyphicon glyphicon-comment show_commnet"></i>
+                                                    <i class = "glyphicon glyphicon-comment show_comment icon"></i>
                                                 </div>
                                                 <div class = "buttons">
                                                     <!--記録者のみ編集と削除のボタン表示-->
