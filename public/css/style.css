@@ -20,7 +20,7 @@
     align-items: center;
 }
 
-.record{
+.record, .article{
     width: 100%;
     max-width: 720px;
     display: flex;
@@ -101,6 +101,9 @@
     width: 60px;
     min-height: 68px;
 }
+.foot{
+    height: 100px;
+}
 
 span.flex :hover{
     cursor: all-scroll;
@@ -118,42 +121,30 @@ span.flex :hover{
     align-items: center;
 }
 
-/*.dep_tp, .des_tp{*/
-/*    height: 35px;*/
-/*    display: flex;*/
-/*    flex-direction:row;*/
-/*}*/
-/*.dep_tp .time, .dep_tp .place{*/
-/*    align-items:flex-start;*/
-/*}*/
-/*.des_tp .time, .des_tp .place{*/
-/*    align-items:flex-end;*/
-/*}*/
 
-/*.route{*/
-/*    height: 72px;*/
-/*    display: flex;*/
-/*    flex-direction:row;*/
-/*    align-items:center;*/
-/*}*/
 
-/*.time, .place{*/
-/*    width: 75px;*/
-/*    display: flex;*/
-/*    flex-direction:row;*/
-/*}*/
-/*.time{*/
-/*    justify-content:flex-end;*/
-/*    border-right: 1px solid #000;*/
-/*    padding-right: 10px;*/
-/*}*/
+/*FAB*/
+.fab {/*円の部分*/
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: block;
+    width: 56px;/*幅*/
+    height: 56px;/*高さ*/
+    background: #fc4482;/*背景色*/
+    text-align: center;/*中央寄せ*/
+    border-radius: 50%;/*角丸く*/
+    transition: .3s;/*滑らかな動きに*/
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.12), 0 2px 2px 0 rgba(0,0,0,.24);/*影*/
+}
 
-/*.place{*/
-/*    padding-left: 10px;*/
-/*}*/
+.fab:hover {/*ホバー時*/
+  box-shadow: 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12), 0 2px 4px -1px rgba(0,0,0,.2);
+}
 
-/*.buttons{*/
-/*    display: flex;*/
-/*    flex-direction:row;*/
-/*    justify-content:flex-end;*/
-/*}*/
+.fab i {/*中央のアイコン*/
+  color: white;
+  line-height: 56px;/*＝幅と高さ*/
+  vertical-align: middle;
+  font-size: 18px;/*サイズ*/
+}

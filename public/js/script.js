@@ -46,7 +46,17 @@ $(window).load(function () {
 
     // 検索ボタンをクリック時にフォーム表示
     $('#search').on('click', function () {
-        $('.search_form').toggle();
+        $('#modal_search').modal('show');
+    });
+
+    // 一覧ページで追加ボタンをクリック時にフォーム表示
+    $('#add_article').on('click', function () {
+        $('#modal_add_article').modal('show');
+    });
+
+    // 詳細ページで追加ボタンをクリック時にフォーム表示
+    $('#add_record').on('click', function () {
+        $('#modal_add_record').modal('show');
     });
 
     // 詳細の並び替えをできるようにする処理
