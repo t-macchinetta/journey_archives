@@ -37,8 +37,10 @@ $(window).load(function () {
     
     // 削除ボタンを押したら確認アラート表示
     $('.delete').on('click', function () {
+    // function check(){
         if(window.confirm("削除しますか?")) {
-            location.href = $(this).attr('href');
+            // location.href = $(this).attr('href');
+            return true;
         } else {
             return false;
         }

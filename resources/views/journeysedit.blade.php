@@ -33,7 +33,8 @@
             <!--コメント-->
             <div class="form-group">
                 <label for="comment">コメント</label>
-                <input type="text" id="comment" name="comment" class="form-control" value="{{$journey->comment}}">
+                <!--<input type="text" id="comment" name="comment" class="form-control" value="{{$journey->comment}}">-->
+                <textarea name="comment" id="comment" rows=4>{{$journey->comment}}</textarea>
             </div>
             <!-- Saveボタン/Backボタン -->
             <div class="well well-sm">

@@ -5,7 +5,6 @@
 
     <!-- Bootstrap の定形コード... -->
 
-    <div class="panel-body">
         <!--バリデーションエラーの表示に使用-->
         @include('common.errors')
         <!--バリデーションエラーの表示に使用-->
@@ -15,101 +14,64 @@
 
             <div class = "flex-row">
                 <div class = "main">
-                    <div>
+                    <div class = "exp">
                         <div>旅行一覧</div>
                     </div>
                     @foreach ($articles as $article)
-                        <div>
-                            <div class="record">
-                                <!--詳細-->
-                            </div>
+                        <div class = "article">
+                            <!--<div class="">-->
+                                <div class = "overview">
+                                    <h4>{{ $article->title }}</h4>
+                                    <p>出発日 ： {{ $article->dep_date }} ({{ $article->length }})</p>
+                                    <p>総予算 ： {{ $article->cost }}</p>
+                                    <p>主な交通 ： {{ $article->traffic }}</p>
+                                </div>
+                                <div class = "flex">
+                                    <div class = "buttons">
+                                        <form action="{{ url('detail') }}" method="POST">
+                                            {{ csrf_field() }}
+                                            <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
+                                            <input type="hidden" name="email" value="{{ $article->email }}" />
+                                            <button id="view" type="submit" class="btn btn-primary show_detail">
+                                                <!--表示-->
+                                                <i class="glyphicon glyphicon-play"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class = "buttons">
+                                        <!--記録者のみ編集と削除のボタン表示-->
+                                    @if($article->email == \Auth::user()->email)
+                                        <div class = "edit"> 
+                                            <form action="{{ url('articlesedit/'.$article->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                <button type="submit" class="btn btn-primary">
+                                                    <!--更新-->
+                                                    <i class="glyphicon glyphicon-pencil"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                        <div class = "">
+                                            <form action="{{ url('article/'.$article->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
+                                                <!--bootstrapのcomponentsの値をクラスに追加する-->
+                                                <button type="submit" class="btn btn-danger delete">
+                                                    <!--削除-->
+                                                    <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
+                                                </button>
+                                            </form>
+                                        </div>
+                                        @endif
+                                    </div>
+                                </div>
+                            <!--</div>-->
                         </div>
                     @endforeach
                     <div class = "foot"></div>
                 </div>
             </div>
-
-
-
-
-            <div class="panel panel-default">
-                <div class="panel-heading"> 
-                </div>
-                <div class="panel-body">
-                    <table class="table table-striped task-table">
-                    <!--テーブルヘッダ-->
-                        <thead>
-                            <th>旅行一覧</th>
-                            <th>&nbsp;</th>
-                        </thead>
-                        <!-- テーブル本体 -->
-                        <tbody>
-                         @foreach ($articles as $article)
-                            <tr>
-                                <td class="table-text">
-                                    <div>{{ $article->title }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $article->dep_date }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $article->length }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $article->cost }}</div>
-                                </td>
-                                <td class="table-text">
-                                    <div>{{ $article->traffic }}</div>
-                                </td>
-                                <!--<td class="table-text">-->
-                                <!--    <div>{{ $article->u_id }}</div>-->
-                                <!--</td>-->
-                                <!--詳細ボタン-->
-                                <td>
-                                    <!--.$article->u_id)-->
-                                    <form action="{{ url('detail') }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <input type="hidden" name="u_id" value="{{ $article->u_id }}" />
-                                        <input type="hidden" name="email" value="{{ $article->email }}" />
-                                        <button type="submit" class="btn btn-primary show_detail">
-                                            <!--表示-->
-                                            <i class="glyphicon glyphicon-play"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                <!--本更新ボタン-->
-                                <td>
-                                    <form action="{{ url('articlesedit/'.$article->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-primary">
-                                            <!--更新-->
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </button>
-                                    </form>
-                                </td>
-                                <!-- 本: 削除ボタン -->
-                                <td>
-                                    <form action="{{ url('article/'.$article->id) }}" method="POST">
-                                        {{ csrf_field() }}
-                                        {{ method_field('DELETE') }}
-                                        <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                        <button type="submit" class="btn btn-danger delete">
-                                            <!--削除-->
-                                            <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
-                                        </button>
-                                    </form>
-                                </td>
-                            </tr>
-                         @endforeach
-                        </tbody>
-                    </table>
-                    <div class = "foot"></div>
-                </div>
-            </div>
         @endif
-        <!--<div id = "add">-->
-        <!--    test-->
-        <!--</div>-->
+        <!--新規追加用ボタン-->
         <a id = "add_article", class="fab" href="#">
           <i class="glyphicon glyphicon-plus"></i>
         </a>
@@ -161,12 +123,15 @@
                             <div class="col-sm-6">
                                 <!--<input type="number" name="cost" id="cost" class="form-control">-->
                                 <select name="cost" id="cost" class="form-control">
-                                    <option value="\1-\10,000">\1-\10,000</option>
-                                    <option value="\10,001-\20,000">\10,001-\20,000</option>
-                                    <option value="\20,001-\30,000">\20,001-\30,000</option>
-                                    <option value="\30,001-\40,000">\30,001-\40,000</option>
-                                    <option value="\40,001-\50,000">\40,001-\50,000</option>
-                                    <option value="\50,001-\60,000">\50,001-\60,000</option>
+                                    <option value="¥0 - ¥10,000">¥0 - ¥10,000</option>
+                                    <option value="¥10,001 - ¥50,000">¥10,001 - ¥50,000</option>
+                                    <option value="¥50,001 - ¥100,000">¥50,001 - ¥100,000</option>
+                                    <option value="¥100,001 - ¥200,000">¥100,001 - ¥200,000</option>
+                                    <option value="¥200,001 - ¥300,000">¥200,001 - ¥300,000</option>
+                                    <option value="¥300,001 - ¥400,000">¥300,001 - ¥400,000</option>
+                                    <option value="¥400,001 - ¥500,000">¥400,001 - ¥500,000</option>
+                                    <option value="¥500,001 - ¥1,000,000">¥500,001 - ¥1,000,000</option>
+                                    <option value="¥1,000,001以上">¥1,000,001以上</option>
                                 </select>
                             </div>
                             <label for="traffic" class="col-sm-4 control-label">主な交通*</label>
@@ -206,11 +171,4 @@
 
 
 
-        
-
-
-        
-
-
-    </div>
 @endsection

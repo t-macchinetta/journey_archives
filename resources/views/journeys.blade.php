@@ -22,7 +22,7 @@
                 </form>
                 <div class = "flex-row">
                     <div class = "main">
-                        <div>
+                        <div class = "exp">
                             <div>レコード一覧</div>
                         </div>
                         <!-- リスト本体，レコードがあるときのみ表示 -->
@@ -56,7 +56,11 @@
                                         @if($email == \Auth::user()->email)
                                         <span class = "flex">
                                         @endif
-                                        <div class = "blank"></div>
+                                        <div class = "blank">
+                                            @if($email == \Auth::user()->email)
+                                            <i class = "glyphicon glyphicon-sort"></i>
+                                            @endif
+                                        </div>
                                         @if($email == \Auth::user()->email)
                                         </span>
                                         @endif
@@ -64,7 +68,9 @@
                                             <div class = "info2">
                                                 <div class = "route">
                                                     {{ $journey->route }}
+                                                    @if($journey->comment != "")
                                                     <i class = "glyphicon glyphicon-comment show_comment icon"></i>
+                                                    @endif
                                                 </div>
                                                 <div class = "buttons">
                                                     <!--記録者のみ編集と削除のボタン表示-->
@@ -78,8 +84,9 @@
                                                             </button>
                                                         </form>
                                                     </div>
-                                                    <div class = "delete">
+                                                    <div class = "">
                                                         <form action="{{ url('journey/'.$journey->id) }}" method="POST">
+                                                        <!--<form action="{{ url('journey/'.$journey->id) }}" method="POST" onSubmit="return check()">-->
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <!--bootstrapのcomponentsの値をクラスに追加する-->
@@ -94,23 +101,23 @@
                                             </div>
                                             <!--コメントと写真アイコンは初期非表示-->
                                             <div class = "comment_pics" hidden>
-                                                @if(isset($journey->comment))
+                                                @if($journey->comment != "")
                                                     <div class = "comment">{{ $journey->comment }}</div>
                                                 @endif
                                                 @if(isset($journey->img1))
-                                                    <a href = "{{ $journey->img1 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                    <a href = "{{ $journey->img1 }}" target="_blank"><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                                 @if(isset($journey->img2))
-                                                    <a href = "{{ $journey->img2 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                    <a href = "{{ $journey->img2 }}" target="_blank"><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                                 @if(isset($journey->img3))
-                                                    <a href = "{{ $journey->img3 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                    <a href = "{{ $journey->img3 }}" target="_blank"><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                                 @if(isset($journey->img4))
-                                                    <a href="{{ $journey->img4 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                    <a href="{{ $journey->img4 }}" target="_blank"><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                                 @if(isset($journey->img5))
-                                                    <a href="{{ $journey->img5 }}" ><i class="glyphicon glyphicon-picture"></i></a>
+                                                    <a href="{{ $journey->img5 }}" target="_blank"><i class="glyphicon glyphicon-picture"></i></a>
                                                 @endif
                                             </div>
                                         </div>
@@ -195,7 +202,8 @@
                                 <!--コメント-->
                                 <label for="comment" class="col-sm-4 control-label">コメント</label>
                                 <div class="col-sm-6">
-                                    <input type="text" name="comment" id="comment" class="form-control">
+                                    <!--<input type="text" name="comment" id="comment" class="form-control">-->
+                                    <textarea name="comment" id="comment" rows=4></textarea>
                                 </div>
                                 <!--写真-->
                                 <label for="img1" class="col-sm-4 control-label">写真</label>

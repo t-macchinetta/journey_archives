@@ -15,10 +15,10 @@
     <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
 
     <!-- Styles -->
-    <link href="css/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
     <!--駅名予測入力用-->
     <!--<link class="css" rel="stylesheet" type="text/css" href="js/expCss/expGuiStation.css">-->
 
@@ -53,12 +53,22 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     旅行の記録
                 </a>
+                <a  id = "search" class="navbar-brand link">
+                    @if (!Auth::guest())
+                    <!--検索ボタン-->
+                    <i class="glyphicon glyphicon-search icon" aria-hidden="true"></i>Search
+                    @endif
+                </a>
+
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li id = "search" class = "link"><a><i class="glyphicon glyphicon-search icon" aria-hidden="true"></i>Search</a></li>
+                    <!--@if (!Auth::guest())-->
+                    <!--検索ボタン-->
+                    <!--<li id = "search" class = "link"><a><i class="glyphicon glyphicon-search icon" aria-hidden="true"></i>Search</a></li>-->
+                    <!--@endif-->
                 </ul>
 
                 <!-- Right Side Of Navbar -->

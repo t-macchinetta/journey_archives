@@ -60,37 +60,51 @@
                 <!--<input type="number" id="cost" name="cost" class="form-control" value="{{$article->cost}}">-->
                 <!--↓コストの値によって初期選択する項目を分岐させる-->
                 <select name="cost" id="cost" class="form-control">
-                    @if($article->cost == '\1-\10,000')
-                        <option value="\1-\10,000" selected>\1-\10,000</option>
+                    @if($article->cost == '¥0 - ¥10,000')
+                        <option value="¥0 - ¥10,000" selected>¥0 - ¥10,000</option>
                     @else
-                        <option value="\1-\10,000">\1-\10,000</option>
+                        <option value="¥0 - ¥10,000">¥0 - ¥10,000</option>
                     @endif
-                    @if($article->cost == '\10,001-\20,000')
-                        <option value="\10,001-\20,000" selected>\10,001-\20,000</option>
+                    @if($article->cost == '¥10,001 - ¥50,000')
+                        <option value="¥10,001 - ¥50,000" selected>¥10,001 - ¥50,000</option>
                     @else
-                        <option value="\10,001-\20,000">\10,001-\20,000</option>
+                        <option value="¥10,001 - ¥50,000">¥10,001 - ¥50,000</option>
                     @endif
-                    @if($article->cost == '\20,001-\30,000')
-                        <option value="\20,001-\30,000" selected>\20,001-\30,000</option>
+                    @if($article->cost == '¥50,001 - ¥100,000')
+                        <option value="¥50,001 - ¥100,000" selected>¥50,001 - ¥100,000</option>
                     @else
-                        <option value="\20,001-\20,000">\20,001-\30,000</option>
+                        <option value="¥50,001 - ¥100,000">¥50,001 - ¥100,000</option>
                     @endif
-                    @if($article->cost == '\30,001-\40,000')
-                        <option value="\30,001-\40,000" selected>\30,001-\40,000</option>
+                    @if($article->cost == '¥100,001 - ¥200,000')
+                        <option value="¥100,001 - ¥200,000" selected>¥100,001 - ¥200,000</option>
                     @else
-                        <option value="\30,001-\40,000">\30,001-\40,000</option>
+                        <option value="¥100,001 - ¥200,000">¥100,001 - ¥200,000</option>
                     @endif
-                    @if($article->cost == '\40,001-\50,000')
-                        <option value="\40,001-\50,000" selected>\40,001-\50,000</option>
+                    @if($article->cost == '¥200,001 - ¥300,000')
+                        <option value="¥200,001 - ¥300,000" selected>¥200,001 - ¥300,000</option>
                     @else
-                        <option value="\40,001-\50,000">\40,001-\50,000</option>
+                        <option value="¥200,001 - ¥300,000">¥200,001 - ¥300,000</option>
                     @endif
-                    @if($article->cost == '\50,001-\60,000')
-                        <option value="\50,001-\60,000" selected>\50,001-\60,000</option>
+                    @if($article->cost == '¥300,001 - ¥400,000')
+                        <option value="¥300,001 - ¥400,000" selected>¥300,001 - ¥400,000</option>
                     @else
-                        <option value="\50,001-\60,000">\50,001-\60,000</option>
+                        <option value="¥300,001 - ¥400,000">¥300,001 - ¥400,000</option>
                     @endif
-                    
+                    @if($article->cost == '¥400,001 - ¥500,000')
+                        <option value="¥400,001 - ¥500,000" selected>¥400,001 - ¥500,000</option>
+                    @else
+                        <option value="¥400,001 - ¥500,000">¥400,001 - ¥500,000</option>
+                    @endif
+                    @if($article->cost == '¥500,001 - ¥1,000,000')
+                        <option value="¥500,001 - ¥1,000,000" selected>¥500,001 - ¥1,000,000</option>
+                    @else
+                        <option value="¥500,001 - ¥1,000,000">¥500,001 - ¥1,000,000</option>
+                    @endif
+                    @if($article->cost == '¥1,000,001以上')
+                        <option value="¥1,000,001以上" selected>¥1,000,001以上</option>
+                    @else
+                        <option value="¥1,000,001以上">¥1,000,001以上</option>
+                    @endif
                 </select>
             </div>
             <div class="form-group">
