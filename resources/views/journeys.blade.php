@@ -58,7 +58,9 @@
                                         @endif
                                         <div class = "blank">
                                             @if($email == \Auth::user()->email)
-                                            <i class = "glyphicon glyphicon-sort"></i>
+                                            <!--動かせます的なアイコン-->
+                                            <i class="material-icons">view_headline</i>
+                                            <!--<i class = "glyphicon glyphicon-align-justify"></i>-->
                                             @endif
                                         </div>
                                         @if($email == \Auth::user()->email)
@@ -69,18 +71,21 @@
                                                 <div class = "route">
                                                     {{ $journey->route }}
                                                     @if($journey->comment != "")
-                                                    <i class = "glyphicon glyphicon-comment show_comment icon"></i>
+                                                    <i class="material-icons show_comment icon">chat</i>
+                                                    <!--<i class = "glyphicon glyphicon-comment show_comment icon"></i>-->
                                                     @endif
-                                                </div>
+                                                </div>@if($journey->email == \Auth::user()->email)
                                                 <div class = "buttons">
                                                     <!--記録者のみ編集と削除のボタン表示-->
-                                                    @if($journey->email == \Auth::user()->email)
+                                                    
                                                     <div class = "edit"> 
                                                         <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
                                                             {{ csrf_field() }}
-                                                            <button type="submit" class="btn btn-primary j_btn">
+                                                            <button type="submit" class="btn j_btn">
+                                                            <!--<button type="submit" class="btn btn-primary j_btn">-->
                                                                 <!--更新-->
-                                                                <i class="glyphicon glyphicon-pencil"></i>
+                                                                <i class="material-icons">edit</i>
+                                                                <!--<i class="glyphicon glyphicon-pencil"></i>-->
                                                             </button>
                                                         </form>
                                                     </div>
@@ -90,14 +95,15 @@
                                                             {{ csrf_field() }}
                                                             {{ method_field('DELETE') }}
                                                             <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                                            <button type="submit" class="btn btn-danger delete j_btn">
+                                                            <button type="submit" class="btn j_btn delete">
                                                                 <!--削除-->
-                                                                <i class="fa fa-trash glyphicon glyphicon-trash"></i> 
+                                                                <i class="material-icons">close</i> 
+                                                                <!--<i class="fa fa-trash glyphicon glyphicon-trash"></i> -->
                                                             </button>
                                                         </form>
                                                     </div>
-                                                    @endif
-                                                </div>
+                                                    
+                                                </div>@endif
                                             </div>
                                             <!--コメントと写真アイコンは初期非表示-->
                                             <div class = "comment_pics" hidden>
@@ -140,13 +146,20 @@
                     </div>
                 </div>
         @else
-            <div>まだデータがありません．追加ボタンを押して記録しましょう．</div>
+        <div class = "flex-row">
+            <div class = "main">
+                <div class = "exp">
+                    <div>まだ記録がありません．</div>
+                </div>
+            </div>
+        </div>
         @endif
         
         <!--登録した本人の場合は追加ボタンを表示-->
         @if($email == \Auth::user()->email)
         <a id = "add_record", class="fab" href="#">
-          <i class="glyphicon glyphicon-plus"></i>
+          <i class="material-icons md-24">add</i>
+          <!--<i class="glyphicon glyphicon-plus"></i>-->
         </a>
 
         <!--モーダル-->

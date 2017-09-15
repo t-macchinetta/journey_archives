@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
@@ -25,7 +26,7 @@
     <style>
         body {
             /*font-family: 'Lato';*/
-            font-family: 'Noto Sans Japanese';
+            font-family: 'helvetica', 'Noto Sans Japanese';
             /*font-family: 'Rounded Mplus 1c';*/
             /*font-family: 'Sawarabi Gothic';*/
             padding-top: 70px;
@@ -56,7 +57,8 @@
                 <a  id = "search" class="navbar-brand link">
                     @if (!Auth::guest())
                     <!--検索ボタン-->
-                    <i class="glyphicon glyphicon-search icon" aria-hidden="true"></i>Search
+                    <i class="material-icons icon" aria-hidden="true">search</i>
+                    <!--<i class="glyphicon glyphicon-search icon" aria-hidden="true"></i>Search-->
                     @endif
                 </a>
 
@@ -106,80 +108,102 @@
 
                 <div class="box_inner">
                     <!--検索用フォーム-->
-                    <form action="{{ url('result') }}" method="POST" class="form-horizontal search_form ">
+                    <form action="{{ url('result') }}" method="POST" class="search_form">
                         {{ csrf_field() }}
                         <div class="form-group">
-                            <label for="free" class="col-sm-4 control-label">フリーワード</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="free" id="free" class="form-control">
-                            </div>
-                            <label for="word" class="col-sm-4 control-label">地名・交通手段など</label>
-                            <div class="col-sm-6">
-                                <input type="text" name="word" id="word" class="form-control">
-                            </div>
-                            <label for="s_dep_date" class="col-sm-4 control-label">出発日</label>
-                            <div class="col-sm-6">
-                                <input type="date" name="dep_date" id="s_dep_date" class="form-control">
-                            </div>
-                            <label for="s_length" class="col-sm-4 control-label">長さ</label>
-                            <div class="col-sm-6">
-                                <!--<input type="text" name="length" id="length" class="form-control">-->
-                            <select name="length" id="s_length" class="form-control">
-                                    <option value=""></option>
-                                    <option value="1日">1日</option>
-                                    <option value="2日">2日</option>
-                                    <option value="3日">3日</option>
-                                    <option value="4日">4日</option>
-                                    <option value="5日">5日</option>
-                                    <option value="6日">6日</option>
-                                    <option value="7日">7日</option>
-                            </select>
-                            </div>
-                            <label for="s_cost" class="col-sm-4 control-label">総予算</label>
-                            <div class="col-sm-6">
-                                <!--<input type="number" name="cost" id="cost" class="form-control">-->
-                                <select name="cost" id="s_cost" class="form-control">
-                                    <option value=""></option>
-                                    <option value="\1-\10,000">\1-\10,000</option>
-                                    <option value="\10,001-\20,000">\10,001-\20,000</option>
-                                    <option value="\20,001-\30,000">\20,001-\30,000</option>
-                                    <option value="\30,001-\40,000">\30,001-\40,000</option>
-                                    <option value="\40,001-\50,000">\40,001-\50,000</option>
-                                    <option value="\50,001-\60,000">\50,001-\60,000</option>
-                                </select>
-                            </div>
-                            <label for="s_traffic" class="col-sm-4 control-label">主な交通</label>
-                            <div class="col-sm-6">
-                                <!--↓項目を追加する，時間とか価格とか-->
-                                <!--<input type="text" name="traffic" id="traffic" class="form-control">-->
-                                <label for="s_none" class="control-label">指定しない</label>
-                                <input type="radio" name="traffic" id="s_none" class="form-control" value="" checked>
-                                <label for="s_train" class="control-label">鉄道</label>
-                                <input type="radio" name="traffic" id="s_train" class="form-control" value="鉄道">
-                                <label for="s_bus" class="control-label">バス</label>
-                                <input type="radio" name="traffic" id="s_bus" class="form-control" value="バス">
-                                <label for="s_plain" class="control-label">飛行機</label>
-                                <input type="radio" name="traffic" id="s_plain" class="form-control" value="飛行機">
-                                <label for="s_ship" class="control-label">船舶</label>
-                                <input type="radio" name="traffic" id="s_ship" class="form-control" value="船舶">
-                                <label for="s_car" class="control-label">自動車</label>
-                                <input type="radio" name="traffic" id="s_car" class="form-control" value="自動車">
-                                <label for="s_bicycle" class="control-label">自転車</label>
-                                <input type="radio" name="traffic" id="s_bicycle" class="form-control" value="自転車">
-                                <label for="s_foot" class="control-label">徒歩</label>
-                                <input type="radio" name="traffic" id="s_foot" class="form-control" value="徒歩">
-                            </div>
-            
+                            <label for="free">フリーワード</label>
+                            <input type="text" name="free" id="free" class="form-control">
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-3 col-sm-6">
+                            <label for="word">地名・交通手段など</label>
+                            <input type="text" name="word" id="word" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="s_dep_date">出発日</label>
+                            <input type="date" name="dep_date" id="s_dep_date" class="form-control">
+                        </div>
+                        <!--<div class="select">-->
+                        <div class="form-group">
+                            <label for="s_length">長さ</label>
+                            <select name="length" id="s_length" class="form-control">
+                                <option value=""></option>
+                                <option value="1日">1日</option>
+                                <option value="2日">2日</option>
+                                <option value="3日">3日</option>
+                                <option value="4日">4日</option>
+                                <option value="5日">5日</option>
+                                <option value="6日">6日</option>
+                                <option value="7日">7日</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="s_cost">総予算</label>
+                            <!--<div class="col-sm-6">-->
+                                <!--<input type="number" name="cost" id="cost" class="form-control">-->
+                            <select name="cost" id="s_cost" class="form-control">
+                                <option value=""></option>
+                                <option value="\1-\10,000">\1-\10,000</option>
+                                <option value="\10,001-\20,000">\10,001-\20,000</option>
+                                <option value="\20,001-\30,000">\20,001-\30,000</option>
+                                <option value="\30,001-\40,000">\30,001-\40,000</option>
+                                <option value="\40,001-\50,000">\40,001-\50,000</option>
+                                <option value="\50,001-\60,000">\50,001-\60,000</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <p class="control-label"><b>主な交通</b></p>
+                            <div class="radio">
+                                <label for="s_none">
+                                    <input type="radio" name="traffic" id="s_none" value="" checked>指定しない
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_train">
+                                    <input type="radio" name="traffic" id="s_train" value="鉄道">鉄道
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_bus">
+                                    <input type="radio" name="traffic" id="s_bus" value="バス">バス
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_plain">
+                                    <input type="radio" name="traffic" id="s_plain" value="飛行機">飛行機
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_ship">
+                                    <input type="radio" name="traffic" id="s_ship" value="船舶">船舶
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_car">
+                                    <input type="radio" name="traffic" id="s_car" value="自動車">自動車
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_bicycle">
+                                    <input type="radio" name="traffic" id="s_bicycle" value="自転車">自転車
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label for="s_foot">
+                                    <input type="radio" name="traffic" id="s_foot" value="徒歩">徒歩
+                                </label>
+                            </div>
+                        </div>
+
+                        <!--<div class="form-group">-->
+                            <div class="">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fa fa-plus glyphicon glyphicon-plus"></i> search
                                 </button>
                             </div>
-                        </div>
+                        <!--</div>-->
                         
                     </form>
+                    <!--</div>-->
                     <!--<p class="text-center"><a class="btn btn-primary" data-dismiss="modal" href="#">閉じる</a></p>-->
                 </div>
             </div>
