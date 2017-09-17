@@ -16,7 +16,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <!--<link href="css/style.css" rel="stylesheet" type="text/css">-->
+    <link rel="stylesheet" href="{{ asset('/css/style.css') }}">
 
     <!--駅名予測入力用-->
     <!--<link class="css" rel="stylesheet" type="text/css" href="js/expCss/expGuiStation.css">-->
@@ -229,7 +230,8 @@
     <!--exResize-->
     <!--<script type="text/javascript" src="jquery.exresize.js"></script>-->
     <!--自作jsファイル-->
-    <script type="text/javascript" src="js/script.js"></script>
+    <!--<script type="text/javascript" src="js/script.js"></script>-->
+    <script src="{{ asset('/js/script.js') }}"></script>
     <!--駅名入力補助用-->
     <!--<script type="text/javascript" src="js/expGuiStation.js?key=LE_hJATfqeEhynen" charset="UTF-8"></script>-->
 
