@@ -170,11 +170,11 @@
                         <button type="button" class="close" data-dismiss="modal">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h4 class="modal-title" id="modal-label">新しい旅行を登録</h4>
+                        <h4 class="modal-title" id="modal-label">新しくルートを追加</h4>
                     </div>
     
                     <div class="box_inner">
-                        <form action="{{ url('journeys') }}" method="POST" class="form-horizontal" enctype="multipart/form-data" accept="image/*">
+                        <form action="{{ url('journeys') }}" method="POST" class="search_form" enctype="multipart/form-data" accept="image/*">
                             <!--↓phpのsession的なチェックをする，セキュリティ的に使用すると良い-->
                             {{ csrf_field() }}
                             <!--{{ $unique }}-->
@@ -183,60 +183,45 @@
                             <input type="hidden" name="u_id" id="u_id" value="{{$unique}}">
                             <!--<div id="station0"></div>-->
                             <!--<input type="hidden" name="u_id" id="u_id" value="1">-->
-                            <!-- 本のタイトル -->
+
                             <div class="form-group">
-                                <!--出発関連-->
-                                <label for="dep_time" class="col-sm-4 control-label">出発時間*</label>
-                                <div class="col-sm-6">
-                                    <input type="time" name="dep_time" id="dep_time" class="form-control">
-                                </div>
-                                <label for="departure" class="col-sm-4 control-label">出発地*</label>
-                                <div class="col-sm-6">
-                                    <!--↓項目を追加する，時間とか価格とか-->
-                                    <!--<div id="station0" class="form-control"></div>-->
-                                    <input type="text" name="departure" id="departure" value="" class="form-control">
-                                </div>
-                                <!--経路関連-->
-                                <label for="route" class="col-sm-4 control-label">経路*</label>
-                                <div class="col-sm-6">
-                                    <input type="text" name="route" id="route" class="form-control">
-                                </div>
-                                <!--目的地関連-->
-                                <label for="des_time" class="col-sm-4 control-label">到着時間*</label>
-                                <div class="col-sm-6">
-                                    <input type="time" name="des_time" id="des_time" class="form-control">
-                                </div>
-                                <label for="destination" class="col-sm-4 control-label">目的地*</label>
-                                <div class="col-sm-6">
-                                    <!--↓項目を追加する，時間とか価格とか-->
-                                    <!--<div id="station1" class="form-control"></div>-->
-                                    <input type="text" name="destination" id="destination" value="" class="form-control">
-                                </div>
-                                <!--コメント-->
-                                <label for="comment" class="col-sm-4 control-label">コメント</label>
-                                <div class="col-sm-6">
-                                    <!--<input type="text" name="comment" id="comment" class="form-control">-->
-                                    <textarea name="comment" id="comment" rows=4></textarea>
-                                </div>
-                                <!--写真-->
-                                <label for="img1" class="col-sm-4 control-label">写真</label>
-                                <div class="col-sm-6">
-                                    <input type="file" name="img1" id="img1" class="form-control">
-                                    <input type="file" name="img2" id="img2" class="form-control">
-                                    <input type="file" name="img3" id="img3" class="form-control">
-                                    <input type="file" name="img4" id="img4" class="form-control">
-                                    <input type="file" name="img5" id="img5" class="form-control">
-                                </div>
+                                <label for="dep_time">出発時間*</label>
+                                <input type="time" name="dep_time" id="dep_time" class="form-control">
                             </div>
-                            
-                            <!-- 本登録ボタン -->
                             <div class="form-group">
-                                <div class="col-sm-offset-3 col-sm-6">
-                                    <button type="submit" class="btn btn-default" id="submit">
-                                        <i class="fa fa-plus glyphicon glyphicon-plus"></i> Save
-                                    </button>
-                                </div>
+                                <label for="departure">出発地*</label>
+                                <input type="text" name="departure" id="departure" class="form-control">
                             </div>
+                            <div class="form-group">
+                                <label for="route">経路*</label>
+                                <input type="text" name="route" id="route" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="des_time">到着時間*</label>
+                                <input type="time" name="des_time" id="des_time" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="destination">目的地*</label>
+                                <input type="text" name="destination" id="destination" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="comment">コメント</label>
+                                <textarea name="comment" id="comment" rows=3 class="form-control"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="img1">写真</label>
+                                <input type="file" name="img1" id="img1" class="form-control">
+                                <input type="file" name="img2" id="img2" class="form-control">
+                                <input type="file" name="img3" id="img3" class="form-control">
+                                <input type="file" name="img4" id="img4" class="form-control">
+                                <input type="file" name="img5" id="img5" class="form-control">
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-default">
+                                    <i class="fa fa-plus glyphicon glyphicon-plus"></i> add
+                                </button>
+                            </div>
+
                         </form>
     
 

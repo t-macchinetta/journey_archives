@@ -11,8 +11,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link href="https://fonts.googleapis.com/earlyaccess/notosansjapanese.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/earlyaccess/roundedmplus1c.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Styles -->
@@ -27,8 +25,6 @@
         body {
             /*font-family: 'Lato';*/
             font-family: 'helvetica', 'Noto Sans Japanese';
-            /*font-family: 'Rounded Mplus 1c';*/
-            /*font-family: 'Sawarabi Gothic';*/
             padding-top: 70px;
         }
 
@@ -138,66 +134,73 @@
                         </div>
                         <div class="form-group">
                             <label for="s_cost">総予算</label>
-                            <!--<div class="col-sm-6">-->
-                                <!--<input type="number" name="cost" id="cost" class="form-control">-->
                             <select name="cost" id="s_cost" class="form-control">
                                 <option value=""></option>
-                                <option value="\1-\10,000">\1-\10,000</option>
-                                <option value="\10,001-\20,000">\10,001-\20,000</option>
-                                <option value="\20,001-\30,000">\20,001-\30,000</option>
-                                <option value="\30,001-\40,000">\30,001-\40,000</option>
-                                <option value="\40,001-\50,000">\40,001-\50,000</option>
-                                <option value="\50,001-\60,000">\50,001-\60,000</option>
+                                <option value="¥0 - ¥10,000">¥0 - ¥10,000</option>
+                                <option value="¥10,001 - ¥50,000">¥10,001 - ¥50,000</option>
+                                <option value="¥50,001 - ¥100,000">¥50,001 - ¥100,000</option>
+                                <option value="¥100,001 - ¥200,000">¥100,001 - ¥200,000</option>
+                                <option value="¥200,001 - ¥300,000">¥200,001 - ¥300,000</option>
+                                <option value="¥300,001 - ¥400,000">¥300,001 - ¥400,000</option>
+                                <option value="¥400,001 - ¥500,000">¥400,001 - ¥500,000</option>
+                                <option value="¥500,001 - ¥1,000,000">¥500,001 - ¥1,000,000</option>
+                                <option value="¥1,000,001以上">¥1,000,001以上</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <p class="control-label"><b>主な交通</b></p>
-                            <div class="radio">
-                                <label for="s_none">
-                                    <input type="radio" name="traffic" id="s_none" value="" checked>指定しない
-                                </label>
+                            <div class="radio-wrap">
+                                <div class="radio">
+                                    <label for="s_none">
+                                        <input type="radio" name="traffic" id="s_none" value="" checked>指定しない
+                                    </label>
+                                </div>
                             </div>
-                            <div class="radio">
-                                <label for="s_train">
-                                    <input type="radio" name="traffic" id="s_train" value="鉄道">鉄道
-                                </label>
+                            <div class="radio-wrap">
+                                <div class="radio">
+                                    <label for="s_train">
+                                        <input type="radio" name="traffic" id="s_train" value="鉄道">鉄道
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="s_bus">
+                                        <input type="radio" name="traffic" id="s_bus" value="バス">バス
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="s_plain">
+                                        <input type="radio" name="traffic" id="s_plain" value="飛行機">飛行機
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="s_ship">
+                                        <input type="radio" name="traffic" id="s_ship" value="船舶">船舶
+                                    </label>
+                                </div>
                             </div>
-                            <div class="radio">
-                                <label for="s_bus">
-                                    <input type="radio" name="traffic" id="s_bus" value="バス">バス
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="s_plain">
-                                    <input type="radio" name="traffic" id="s_plain" value="飛行機">飛行機
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="s_ship">
-                                    <input type="radio" name="traffic" id="s_ship" value="船舶">船舶
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="s_car">
-                                    <input type="radio" name="traffic" id="s_car" value="自動車">自動車
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="s_bicycle">
-                                    <input type="radio" name="traffic" id="s_bicycle" value="自転車">自転車
-                                </label>
-                            </div>
-                            <div class="radio">
-                                <label for="s_foot">
-                                    <input type="radio" name="traffic" id="s_foot" value="徒歩">徒歩
-                                </label>
+                            <div class="radio-wrap">
+                                <div class="radio">
+                                    <label for="s_car">
+                                        <input type="radio" name="traffic" id="s_car" value="自動車">自動車
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="s_bicycle">
+                                        <input type="radio" name="traffic" id="s_bicycle" value="自転車">自転車
+                                    </label>
+                                </div>
+                                <div class="radio">
+                                    <label for="s_foot">
+                                        <input type="radio" name="traffic" id="s_foot" value="徒歩">徒歩
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
                         <!--<div class="form-group">-->
                             <div class="">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-plus glyphicon glyphicon-plus"></i> search
+                                    <i class="fa fa-plus glyphicon glyphicon-search"></i> search
                                 </button>
                             </div>
                         <!--</div>-->

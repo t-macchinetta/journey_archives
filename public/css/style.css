@@ -192,7 +192,21 @@
     padding: 10px 40px 10px 30px;
 }
 
+.box_inner{
+    padding: 10px;
+}
+.radio-wrap{
+    display: flex;
+    justify-content: flex-start;
+}
+.radio-width{
+    width: 300px;
+}
+.checkbox+.checkbox, .radio+.radio, .checkbox, .radio{
+    margin-top: 10px; 
+    width: 125px;
 
+}
 
 .blank{
     width: 70px;
