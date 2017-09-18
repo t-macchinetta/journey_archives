@@ -43,14 +43,28 @@
                                     @endif
                                     <div class = "detail">
                                         <div class = "time">
-                                        @if($email == \Auth::user()->email)
-                                        <span class = "flex">
-                                        @endif
-                                            <div class = "dep_t">{{ $journey->dep_time }}</div>
-                                        @if($email == \Auth::user()->email)
-                                        </span>
-                                        @endif
+                                            @if($email == \Auth::user()->email)
+                                            <span class = "flex">
+                                            @endif
+                                                <div class = "dep_t">{{ $journey->dep_time }}</div>
+                                            @if($email == \Auth::user()->email)
+                                            </span>
+                                            @endif
                                             <div class = "dep_p">{{ $journey->departure }}</div>
+                                            <!--記録者のみ☓ボタン表示-->
+                                            @if($journey->email == \Auth::user()->email)
+                                            <div class = "delete_btn">
+                                                <form action="{{ url('journey/'.$journey->id) }}" method="POST">
+                                                    {{ csrf_field() }}
+                                                    {{ method_field('DELETE') }}
+                                                    <!--bootstrapのcomponentsの値をクラスに追加する-->
+                                                    <button type="submit" class="btn j_btn delete">
+                                                        <!--削除-->
+                                                        <i class="material-icons">close</i> 
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            @endif
                                         </div>
                                         <div class = "flex">
                                         @if($email == \Auth::user()->email)
@@ -60,7 +74,6 @@
                                             @if($email == \Auth::user()->email)
                                             <!--動かせます的なアイコン-->
                                             <i class="material-icons">view_headline</i>
-                                            <!--<i class = "glyphicon glyphicon-align-justify"></i>-->
                                             @endif
                                         </div>
                                         @if($email == \Auth::user()->email)
@@ -72,38 +85,22 @@
                                                     {{ $journey->route }}
                                                     @if($journey->comment != "")
                                                     <i class="material-icons show_comment icon">chat</i>
-                                                    <!--<i class = "glyphicon glyphicon-comment show_comment icon"></i>-->
                                                     @endif
-                                                </div>@if($journey->email == \Auth::user()->email)
+                                                </div>
+                                                @if($journey->email == \Auth::user()->email)
                                                 <div class = "buttons">
-                                                    <!--記録者のみ編集と削除のボタン表示-->
-                                                    
+                                                    <!--記録者のみ編集のボタン表示-->
                                                     <div class = "edit"> 
                                                         <form action="{{ url('journeysedit/'.$journey->id) }}" method="POST">
                                                             {{ csrf_field() }}
                                                             <button type="submit" class="btn j_btn">
-                                                            <!--<button type="submit" class="btn btn-primary j_btn">-->
                                                                 <!--更新-->
                                                                 <i class="material-icons">edit</i>
-                                                                <!--<i class="glyphicon glyphicon-pencil"></i>-->
                                                             </button>
                                                         </form>
                                                     </div>
-                                                    <div class = "">
-                                                        <form action="{{ url('journey/'.$journey->id) }}" method="POST">
-                                                        <!--<form action="{{ url('journey/'.$journey->id) }}" method="POST" onSubmit="return check()">-->
-                                                            {{ csrf_field() }}
-                                                            {{ method_field('DELETE') }}
-                                                            <!--bootstrapのcomponentsの値をクラスに追加する-->
-                                                            <button type="submit" class="btn j_btn delete">
-                                                                <!--削除-->
-                                                                <i class="material-icons">close</i> 
-                                                                <!--<i class="fa fa-trash glyphicon glyphicon-trash"></i> -->
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                    
-                                                </div>@endif
+                                                </div>
+                                                @endif
                                             </div>
                                             <!--コメントと写真アイコンは初期非表示-->
                                             <div class = "comment_pics" hidden>

@@ -1,9 +1,9 @@
 @extends('layouts.app')
 @section('content')
-<div class="row">
-    <div class="col-md-12">
+<div class = "flex-row">
+    <div class = "main">
     @include('common.errors')
-        <form action="{{ url('journeys/update') }}" method="POST">
+        <form action="{{ url('journeys/update') }}" method="POST" class="search_form">
             <input type="hidden" name="u_id" value="{{$journey->u_id}}">
             <!-- 出発地関連 -->
             <div class="form-group">
@@ -33,8 +33,7 @@
             <!--コメント-->
             <div class="form-group">
                 <label for="comment">コメント</label>
-                <!--<input type="text" id="comment" name="comment" class="form-control" value="{{$journey->comment}}">-->
-                <textarea name="comment" id="comment" rows=4>{{$journey->comment}}</textarea>
+                <textarea name="comment" id="comment" rows=3 class="form-control">{{$journey->comment}}</textarea>
             </div>
             <!-- Saveボタン/Backボタン -->
             <div class="well well-sm">
