@@ -207,7 +207,9 @@
 .checkbox+.checkbox, .radio+.radio, .checkbox, .radio{
     margin-top: 10px; 
     width: 125px;
-
+}
+.col-md-6 .checkbox{
+    width: auto;
 }
 
 .blank{
