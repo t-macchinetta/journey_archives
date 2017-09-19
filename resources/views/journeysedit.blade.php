@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <div class = "flex-row">
-    <div class = "main">
+    <div class = "edit">
     @include('common.errors')
         <form action="{{ url('journeys/update') }}" method="POST" class="search_form">
             <input type="hidden" name="u_id" value="{{$journey->u_id}}">
@@ -36,12 +36,18 @@
                 <textarea name="comment" id="comment" rows=3 class="form-control">{{$journey->comment}}</textarea>
             </div>
             <!-- Saveボタン/Backボタン -->
-            <div class="well well-sm">
-                <a class="btn btn-link pull-right" href="{{ url('/detail') }}">
+            <div class="well well-sm flex wide">
+                <a class="btn btn-link" href="{{ url('/detail') }}">
                     <i class="glyphicon glyphicon-backward"></i>  Back
                 </a>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary right">Save</button>
             </div>
+            <!--<div class="well well-sm">-->
+            <!--    <a class="btn btn-link pull-right" href="{{ url('/detail') }}">-->
+            <!--        <i class="glyphicon glyphicon-backward"></i>  Back-->
+            <!--    </a>-->
+            <!--    <button type="submit" class="btn btn-primary">Save</button>-->
+            <!--</div>-->
             <!-- id 値を送信 -->
             <input type="hidden" name="id" value="{{$journey->id}}" /> <!--/ id 値を送信 -->
             <!-- CSRF -->

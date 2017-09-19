@@ -53,11 +53,13 @@
 #search:hover{
     cursor: pointer;
 }
-.main{
+.main, .edit{
     width: 100%;
     max-width: 720px;
 }
-
+.edit{
+    padding: 0 10px;
+}
 .list{
     max-width: 720px;
     display: flex;
@@ -213,17 +215,24 @@
 }
 
 .blank{
-    width: 70px;
+    min-width: 70px;
     min-height: 68px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     color:#666;
 }
+.submit_btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .foot{
     height: 100px;
 }
-
+.right{
+    margin-left: auto;
+}
 span.flex :hover{
     cursor: all-scroll;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 
     <title>旅行の記録</title>
 
@@ -199,7 +199,7 @@
                         </div>
 
                         <!--<div class="form-group">-->
-                            <div class="">
+                            <div class="submit_btn">
                                 <button type="submit" class="btn btn-default">
                                     <i class="fa fa-plus glyphicon glyphicon-search"></i> search
                                 </button>

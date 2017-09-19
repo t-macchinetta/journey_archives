@@ -2,7 +2,7 @@
 @section('content')
 
 <div class = "flex-row">
-    <div class = "main">
+    <div class = "edit">
     @include('common.errors')
         <form action="{{ url('articles/update') }}" method="POST" class="search_form">
             <div class="form-group">
@@ -179,11 +179,11 @@
                 </div>
             </div>
             <!-- Saveボタン/Backボタン -->
-            <div class="well well-sm">
-                <a class="btn btn-link pull-right" href="{{ url('/') }}">
+            <div class="well well-sm flex wide">
+                <a class="btn btn-link" href="{{ url('/') }}">
                     <i class="glyphicon glyphicon-backward"></i>  Back
                 </a>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn btn-primary right">Save</button>
             </div>
             <!-- id 値を送信 -->
             <input type="hidden" name="id" value="{{$article->id}}" /> <!--/ id 値を送信 -->

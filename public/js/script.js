@@ -1,5 +1,5 @@
 // $(function () {
-$(window).load(function () {
+$(window).on('load',function () {
     // var h = $('.record').height();
     // $('.time').height(h);
 
@@ -109,7 +109,8 @@ $(window).load(function () {
     // 並び替えここまで
 
     // コメントのアイコンをクリックするとコメント内容を表示
-    $(document).on("click", ".show_comment", function(){
+    // $(document).on('click', '.show_comment', function(){
+    $(".show_comment").on('click', function(){
         // alert("test");
         $(this).parents('.record').find('.comment_pics').slideToggle();
     });

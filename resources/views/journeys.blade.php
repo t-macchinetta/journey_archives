@@ -84,7 +84,7 @@
                                                 <div class = "route">
                                                     {{ $journey->route }}
                                                     @if($journey->comment != "")
-                                                    <i class="material-icons show_comment icon">chat</i>
+                                                    <i class="material-icons icon show_comment">chat</i>
                                                     @endif
                                                 </div>
                                                 @if($journey->email == \Auth::user()->email)
@@ -213,9 +213,9 @@
                                 <input type="file" name="img4" id="img4" class="form-control">
                                 <input type="file" name="img5" id="img5" class="form-control">
                             </div>
-                            <div class="">
+                            <div class="submit_btn">
                                 <button type="submit" class="btn btn-default">
-                                    <i class="fa fa-plus glyphicon glyphicon-plus"></i> add
+                                    <i class="fa fa-plus glyphicon glyphicon-plus"></i> ルートを追加
                                 </button>
                             </div>
 

@@ -183,9 +183,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="">
+                        <div class="submit_btn">
                             <button type="submit" class="btn btn-default">
-                                <i class="fa fa-plus glyphicon glyphicon-plus"></i> add
+                                <i class="fa fa-plus glyphicon glyphicon-plus"></i> 旅行を追加
                             </button>
                         </div>
 
