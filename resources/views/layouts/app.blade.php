@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1">
 
-    <title>旅行の記録</title>
+    <title>Travel Traffic</title>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
@@ -49,7 +49,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    旅行の記録
+                    Travel Traffic
                 </a>
                 <a  id = "search" class="navbar-brand link">
                     @if (!Auth::guest())
@@ -98,7 +98,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true" class="white">&times;</span>
                     </button>
                     <h4 class="modal-title" id="modal-label">他の旅行を検索</h4>
                 </div>
@@ -200,7 +200,7 @@
 
                         <!--<div class="form-group">-->
                             <div class="submit_btn">
-                                <button type="submit" class="btn btn-default">
+                                <button type="submit" class="btn btn-default white">
                                     <i class="fa fa-plus glyphicon glyphicon-search"></i> search
                                 </button>
                             </div>

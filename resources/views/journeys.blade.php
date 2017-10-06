@@ -165,7 +165,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">
-                            <span aria-hidden="true">&times;</span>
+                            <span aria-hidden="true" class="white">&times;</span>
                         </button>
                         <h4 class="modal-title" id="modal-label">新しくルートを追加</h4>
                     </div>
@@ -214,14 +214,11 @@
                                 <input type="file" name="img5" id="img5" class="form-control">
                             </div>
                             <div class="submit_btn">
-                                <button type="submit" class="btn btn-default">
+                                <button type="submit" class="btn btn-default white">
                                     <i class="fa fa-plus glyphicon glyphicon-plus"></i> ルートを追加
                                 </button>
                             </div>
-
                         </form>
-    
-
                     </div>
                 </div>
             </div>

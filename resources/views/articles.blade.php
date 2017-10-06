@@ -92,7 +92,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true" class="white">&times;</span>
                     </button>
                     <h4 class="modal-title" id="modal-label">新しい旅行を登録</h4>
                 </div>
@@ -184,7 +184,7 @@
                             </div>
                         </div>
                         <div class="submit_btn">
-                            <button type="submit" class="btn btn-default">
+                            <button type="submit" class="btn btn-default white">
                                 <i class="fa fa-plus glyphicon glyphicon-plus"></i> 旅行を追加
                             </button>
                         </div>

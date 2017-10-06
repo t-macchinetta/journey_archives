@@ -195,9 +195,21 @@
 .comment_pics{
     padding: 10px 40px 10px 30px;
 }
+.modal-header{
+    background-color: #177cd4;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+}
 
+.white{
+    color: #fff;
+    background-color: #177cd4;
+}
 .box_inner{
-    padding: 10px;
+    padding: 40px 20px;
+}
+.form-group {
+    margin-bottom: 20px;
 }
 .radio-wrap{
     display: flex;
